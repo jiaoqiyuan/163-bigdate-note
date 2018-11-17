@@ -83,7 +83,7 @@ mkdir -p data/{0..2}
 
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>/mnt/home/1015146591/0,/mnt/home/1015146591/1,/mnt/home/1015146591/2</value>
+        <value>/mnt/home/1015146591/data/0,/mnt/home/1015146591/data/1,/mnt/home/1015146591/data/2</value>
     </property>
 </configuration>
 ```
