@@ -106,4 +106,4 @@ hdfs namenode
 hdfs datanode
 ```
 
-12. 配置其他远程主机的Hadoop环境，与bigdata0配置流程一样，注意把hdfs-site.xml中的bigdata0换成响应的bigdata1、bigdata2、bigdata3、bigdata4即可。
+12. 配置其他远程主机的Hadoop环境，与bigdata0配置流程一样，注意把hdfs-site.xml中的datanode相关字段的bigdata0换成相应的bigdata1、bigdata2、bigdata3、bigdata4即可，namenode相关的value不用改变，因为namenode用的都是bigdata0上的namenode。
