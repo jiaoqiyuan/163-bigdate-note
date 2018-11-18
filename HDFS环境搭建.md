@@ -1,7 +1,7 @@
 # HDFS环境搭建
 1. 拷贝/home/hadoop/hadoop-2.7.6.tar.gz到自己的目录：
 ```
-/home/hadoop/hadoop-2.7.6.tar.gz ~/
+cp /home/hadoop/hadoop-2.7.6.tar.gz ~/
 ```
 
 2. 解压
