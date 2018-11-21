@@ -23,6 +23,10 @@
         <name>yarn.nodemanager.local-dirs</name>
         <value>/mnt/home/1015146591/yarn/0/local,/mnt/home/1015146591/yarn/1/local,/mnt/home/1015146591/yarn/2/local</value>
     </property>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
 </configuration>
 
 ```
@@ -51,10 +55,21 @@
 ```
 yarn resourcemanager
 ```
+后台启动resourcemanager的方法：
+```
+hadoop-current/sbin/yarn-daemon.sh start resourcemanager
+```
 
 4. 同样的方法，配置bigdata1, bigdata2, bigdata3几台机器，注意这里没有配置bigdata4，可能bigdata4用于其他特殊用途把，之前的HDFS也没有配置bigdata4。
 
+5. 启动nodemanager
+```
+yarn nodemanager
+```
+后台启动nodemanager的方法：
+```
+hadoop-current/sbin/yarn-daemon.sh start nodemanager
+```
 
-
-
+6. 运行yarn示例（注意要把HDFSdatanode打开）
 
