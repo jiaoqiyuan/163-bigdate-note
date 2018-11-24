@@ -28,10 +28,18 @@
 
     - zookeeper中也存在两个namenode,只不过除了主namenode,另一个叫Standby Namenode,会时刻进行数据的同步,保证与主Namenode数据一致.
 
-    - 只有active Namenode可以将自己的edits log写入到journalNod组成的Shared Eidts中,Standby Namenode定期从其中读取.
+    - 只有active Namenode可以将自己的edits log写入到journalNod组成的QJM中,Standby Namenode定期从QJM中读取.
 
-    
+- ZKFC 使用Zookeeper来选主,监控NN,触发NN状态切换
 
-[1]: 
+- QJM:由多个JournalNode组成的Quorum集群,实现分布式日志的高可用性
 
+- ANN(Active Namenode)将元数据editlog发布到QJM集群中,SNN(Standby Namenode)从QJM集群上读取集群的EditLog,应用自己的元数据.
+
+- 高可用参数配置
+    ![参数配置][3]
+
+
+[1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/HDFS%E9%AB%98%E5%8F%AF%E7%94%A8.png
 [2]: https://img-blog.csdn.net/20170720172537062?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDAzMzIxOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast
+[3]: ccc
