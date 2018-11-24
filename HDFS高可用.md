@@ -37,9 +37,10 @@
 - ANN(Active Namenode)将元数据editlog发布到QJM集群中,SNN(Standby Namenode)从QJM集群上读取集群的EditLog,应用自己的元数据.
 
 - 高可用参数配置
+
     ![参数配置][3]
 
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/HDFS%E9%AB%98%E5%8F%AF%E7%94%A8.png
 [2]: https://img-blog.csdn.net/20170720172537062?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDAzMzIxOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast
-[3]: ccc
+[3]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/%E9%AB%98%E5%8F%AF%E7%94%A8%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png
