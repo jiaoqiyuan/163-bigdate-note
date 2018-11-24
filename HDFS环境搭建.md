@@ -30,7 +30,7 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
-6. 配置hadoop-2.7.6/etc/hadoop/core_site.xml
+6. 配置hadoop-2.7.6/etc/hadoop/core-site.xml
 ```
 <configuration>
         <property>
