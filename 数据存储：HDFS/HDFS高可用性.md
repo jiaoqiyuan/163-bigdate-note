@@ -41,6 +41,6 @@
     ![参数配置][3]
 
 
-[1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/HDFS%E9%AB%98%E5%8F%AF%E7%94%A8.png
-[2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/img/zookeeper%E6%9E%B6%E6%9E%84.png?raw=true
-[3]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/%E9%AB%98%E5%8F%AF%E7%94%A8%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png
+[1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/HDFS%E9%AB%98%E5%8F%AF%E7%94%A8.png
+[2]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/zookeeper%E6%9E%B6%E6%9E%84.png
+[3]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/%E9%AB%98%E5%8F%AF%E7%94%A8%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png

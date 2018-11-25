@@ -80,17 +80,5 @@ hadoop jar hadoop-current/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.6
 
 现象：按照老师讲得yarn配置完bigdat0123后，在bigdat0123上运行wordcount和pi示例，有时候又shuffle错误，有时候没有。
 
-原因：老师在bigdat0上的/home/hadoop目录下的yarn-site.xml没有配置shuffle导致的。
-
-解释：可以通过webUI和运行示例时的日志信息查找原因，从本地运行日志信息可以获取到当前这次运行的示例被分配的application号，
-
-凡是出现shuffle错误的应用都不会运行在bigdat0的container中，凡是出现shuffle错误的应用肯定是分配到了bigdata0的container中运行了。也就是说resourcemanager只要不把作业分配到bigdata0的container中执行就不会有shuffle错误。
-
-- 运行过程中没有出现shuffle错误， 该应用id是10709，![application][1]。
-
-在bigdata123上分别查看它运行过的applicationid，![application][2]，![application][3]，![application][4]，![application][5]。
-
-- 再看一个运行出现shuffle错误的情况，该应用id是 ![application][6].
-
-在bigdata123上分别查看它运行过的applicationid，![application][7]，![application][8]，![application][9]，![application][10]。
+猜测原因：老师在bigdat0上的/home/hadoop目录下的yarn-site.xml没有配置shuffle导致的。
 

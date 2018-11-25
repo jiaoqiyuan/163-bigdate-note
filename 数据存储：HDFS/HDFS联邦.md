@@ -50,6 +50,6 @@ HDFS联邦在hadoop官网的HDFS中有详细介绍，[HDFS federation][1].
 
 
 [1]: http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/Federation.html
-[2]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/HDFS%E5%8D%95%E8%8A%82%E7%82%B9%E6%9E%B6%E6%9E%84.gif
-[3]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/HDFS%E8%81%94%E9%82%A6%E6%9E%B6%E6%9E%84.gif
-[4]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/HDFS%E8%81%94%E9%82%A6%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E.png
+[2]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/HDFS%E5%8D%95%E8%8A%82%E7%82%B9%E6%9E%B6%E6%9E%84.gif
+[3]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/HDFS%E8%81%94%E9%82%A6%E6%9E%B6%E6%9E%84.gif
+[4]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/HDFS%E8%81%94%E9%82%A6%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E.png

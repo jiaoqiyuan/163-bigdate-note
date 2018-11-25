@@ -52,5 +52,5 @@
 [6]: https://gerardnico.com/security/kerberos/tgt
 [7]: https://www.techopedia.com/definition/27186/ticket-granting-server-tgs
 [8]: https://blog.csdn.net/mm_bit/article/details/50788709
-[9]: https://img-blog.csdn.net/20140308190730281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvamV3ZXM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast
-[10]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/img/HDFS%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0.png
+[9]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/Kerberos%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B.png
+[10]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/HDFS%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0.png
