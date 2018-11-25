@@ -36,7 +36,7 @@
         ![HDFS federation][4]
 
     - 组成HDFS联邦的必要步骤：
-        1. 确认需要加入到HDFS的clusterID，clusterID是一个字符串，这里的clusterID在namenode格式化前可以指定也可以在格式化时随机生成。
+        1. 确认需要加入到HDFS的clusterID，clusterID是一个字符串，这里的clusterID在namenode格式化前可以指定也可以在格式化时随机生成.
         2. 查看clusterID
             ```
             cat ${dfs.namenode.dir}/current/VERSION
