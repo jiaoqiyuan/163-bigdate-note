@@ -29,3 +29,4 @@
 [6]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E8%81%94%E9%82%A6.md
 [7]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E5%AE%89%E5%85%A8.md
 [8]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%88%86%E7%89%87.md
+[9]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.md
