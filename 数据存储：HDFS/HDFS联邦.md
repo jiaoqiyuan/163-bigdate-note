@@ -27,16 +27,21 @@
     ![HDFS联邦][3]
 
     - 特点
+    
         - 分布式命名空间
+
         - 通用的底层存储
 
     - HDFS联邦允许NN水平扩展，解决了元数据的膨胀问题，底层使用block pool来统一存储系统，不同的NN对应不同的pool。
 
     - HDFS联邦参数说明
-        ![HDFS federation][4]
+
+        ![HDFS federation][4]
 
     - 组成HDFS联邦的必要步骤：
-        1. 确认需要加入到HDFS的clusterID，clusterID是一个字符串，这里的clusterID在namenode格式化前可以指定也可以在格式化时随机生成.
+
+        1. 确认需要加入到HDFS的clusterID，clusterID是一个字符串，这里的clusterID在namenode格式化前可以指定也可以在格式化时随机生成.
+
         2. 查看clusterID
             ```
             cat ${dfs.namenode.dir}/current/VERSION
