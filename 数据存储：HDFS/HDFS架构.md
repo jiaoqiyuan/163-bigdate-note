@@ -38,11 +38,12 @@
     - Block模块
 
         数据切分成热定大小的数据块,分发到不同的存储节点.
+        
         ![BlockReplication][3]
 
     - Replication副本
 
-        数据块在不同存储节点之间,通过复制方式来拷贝多个副本进行存储
+        数据块在不同存储节点之间,通过复制方式来拷贝多个副本进行存储.
 
 
 [1]: http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html
