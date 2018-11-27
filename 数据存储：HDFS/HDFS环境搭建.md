@@ -1,5 +1,7 @@
 # HDFS环境搭建
-1. 拷贝/home/hadoop/hadoop-2.7.6.tar.gz到自己的目录：
+
+
+1. 拷贝/home/hadoop/hadoop-2.7.6.tar.gz到自己的目录(以下操作都是在当前用户的家目录下进行操作的!)：
 ```
 cp /home/hadoop/hadoop-2.7.6.tar.gz ~/
 ```
@@ -52,7 +54,7 @@ mkdir name
 mkdir -p data/{0..2}
 ```
 
-- 配置hdfs-site.xml：
+- 配置hdfs-site.xml(注意要把Namenode和Datanode相关的端口信息改成你自己的端口信息,33271~33275是网易分配给我的,要替换成你们自己的!另外namenode和datanode的dir也换成你们自己的目录!)：
 ```
 <configuration>
    <property>
