@@ -29,6 +29,11 @@
     - 向Datanode和Namenode发起读写请求.
 
 
+- 这里还有一个中文版简图,对比上面的官方架构图看一下.
+
+    ![HDFS中文架构简图][4]
+
+
 - HDFS内含相关概念
 
     - Rack机架
@@ -49,3 +54,4 @@
 [1]: http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html
 [2]: http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/images/hdfsarchitecture.png
 [3]: http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/images/hdfsdatanodes.png
+[4]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/img/HDFS%E6%9E%B6%E6%9E%84%E4%B8%AD%E6%96%87%E7%AE%80%E5%9B%BE.jpg
