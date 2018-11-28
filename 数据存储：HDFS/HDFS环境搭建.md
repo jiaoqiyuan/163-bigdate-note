@@ -100,7 +100,7 @@ hdfs namenode -format
 hdfs namenode
 ```
 
-10. 使用浏览器查看hdfs，在浏览器输入10.173.32.5:33272，**注意33272是我配置的自己的端口好，你们根据自己配置的端口号进行替换即可，在dfs-site.xml文件中查看dfs.datanode.http.address字段的值就是**
+10. 使用浏览器查看hdfs，在浏览器输入10.173.32.5:33272，**注意33272是我配置的自己的端口好，你们根据自己配置的端口号进行替换即可，在dfs-site.xml文件中查看dfs.namenode.http-address字段的值就是**
 
 
 11. 启动datanode
