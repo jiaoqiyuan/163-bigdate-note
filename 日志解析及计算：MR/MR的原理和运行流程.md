@@ -8,7 +8,7 @@
 
     - block是HDFS上的文件块，split是文件的分片（逻辑划分，不包含具体数据，只包含这些数据的位置信息）。
 
-        - 一个split包含一个或多个block，默认是一对一的关系。
+        - 一个split包含一个或多个block，默认是一对一的关系。
 
         - 一个split不包含两个文件的block， 不会跨越file边界，也就是说一个split是不会跨文件进行划分的。
 
@@ -127,7 +127,7 @@
 
         - RM将集群的容量信息发送给AppMaster，AppMaster计算这个程序需要的资源量后，根据需要想RM请求更多的container。
         
-        - 最后由各个NodeManager在节点上启动MapTask和ReduceTask。
+        - 最后由各个NodeManager在节点上启动MapTask和ReduceTask。
 
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/img/Map%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B.png
