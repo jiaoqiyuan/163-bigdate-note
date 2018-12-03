@@ -3,43 +3,43 @@
 
 ## 数据平台综述
 
-### [数据管理技术的演化](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%BB%BC%E8%BF%B0/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E6%8A%80%E6%9C%AF%E7%9A%84%E6%BC%94%E5%8C%96.md)
+1. [数据管理技术的演化](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%BB%BC%E8%BF%B0/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E6%8A%80%E6%9C%AF%E7%9A%84%E6%BC%94%E5%8C%96.md)
 
-### [学习的方法论](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%BB%BC%E8%BF%B0/%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA.md)
+2. [学习的方法论](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%BB%BC%E8%BF%B0/%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA.md)
 
 ----
 
 ## 数据存储：HDFS
 
-### [HDFS架构][10]
+1. [HDFS架构][10]
 
-### [HDFS环境搭建][1]
+2. [HDFS环境搭建][1]
 
-### [HDFS操作验证][2]
+3. [HDFS操作验证][2]
 
-### [YARN配置][3]
+4. [YARN配置][3]
 
-### [HDFS管理与使用][4]
+5. [HDFS管理与使用][4]
 
-### [HDFS高可用性][5]
+6. [HDFS高可用性][5]
 
-### [HDFS联邦][6]
+7. [HDFS联邦][6]
 
-### [HDFS安全][7]
+8. [HDFS安全][7]
 
-### [压缩与分片][8]
+9. [压缩与分片][8]
 
-### [异常处理][9]
+10. [异常处理][9]
 
 ----
 
 ## 日志解析及计算：MR
 
-### [MR的应用场景][11]
+1. [MR的应用场景][11]
 
-### [MR的原理和运行流程][12]
+2. [MR的原理和运行流程][12]
 
-### [编写一个MR程序][13]
+3. [编写一个MR程序][13]
 
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
