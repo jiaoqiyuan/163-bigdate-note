@@ -111,7 +111,7 @@
 
         - **本地测试 (这里需要注意一下)** 
 
-            **这里需要注意一下,我在本地也搭建了一个hadoop环境,core-site.xml中默认文件地址配置成本地的了,hdfs和yarn都按照服务端配置了一遍,只不过把所有的bigdat0都换成了localhost,namenode,datanode,resourcemanager,nodemanager相关的目录改写成本地的目录,变成本地配置了.**
+            **这里需要注意一下,我在本地也搭建了一个hadoop环境,core-site.xml中默认文件地址配置成本地的了,hdfs和yarn都按照服务端配置了一遍,只不过把所有的bigdat0都换成了localhost, namenode/datanode/resourcemanager/nodemanager相关的目录改写成本地的目录,变成本地配置了.**
 
             这里老师先是在本地进行测试,可以看到输入路径(input目录)和输出路径(output目录)都是在本地而不是在HDFS上的,一开始我也很困惑,ParseLogJob.java中Path明明使用的是org.apache.hadoop.fs.Path,按说应该是使用HDFS上的目录才对,后来发现应该是老师应该是将core-site.xml中的fs.defaultFS设置成了本地目录,所以最终才会是在本地目录进行操作的.
 
