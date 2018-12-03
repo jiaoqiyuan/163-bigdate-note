@@ -97,7 +97,7 @@
 
     - 编写MR程序
 
-        - 在src/main/java目录下建立com.bigdata.etl.job包，并在该包内创建[ParseLogJob.java]()。
+        - 在src/main/java目录下建立com.bigdata.etl.job包，并在该包内创建[ParseLogJob.java](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/etl/src/main/com/bigdata/etl/job/ParseLogJob.java)。
 
         - 编写MR程序可以使用Hadoop提供的Maper的抽象类，继承这个抽象类并重写里面的Map方法，就可以实现Map操作了。
 
