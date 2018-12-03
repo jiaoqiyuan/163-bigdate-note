@@ -113,6 +113,8 @@
 
             **这里需要注意一下,我在本地也搭建了一个hadoop环境,core-site.xml中默认文件地址配置成本地的了,hdfs和yarn都按照服务端配置了一遍,只不过把所有的bigdat0都换成了localhost, namenode/datanode/resourcemanager/nodemanager相关的目录改写成本地的目录,变成本地配置了.**
 
+            本地hadoop环境的搭建参考[这个链接](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0hadoop%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83.md)。
+
             这里老师先是在本地进行测试,可以看到输入路径(input目录)和输出路径(output目录)都是在本地而不是在HDFS上的,一开始我也很困惑,ParseLogJob.java中Path明明使用的是org.apache.hadoop.fs.Path,按说应该是使用HDFS上的目录才对,后来发现应该是老师应该是将core-site.xml中的fs.defaultFS设置成了本地目录,所以最终才会是在本地目录进行操作的.
 
             感觉这里老师这样做的目的是现在本地做测试,测试一下程序的功能没问题后再放集群去运行,在本地测试一般使用小数据量测试一下功能就行,没必要用HDFS进行存储,所以就配置成本地硬盘存储数据了.
