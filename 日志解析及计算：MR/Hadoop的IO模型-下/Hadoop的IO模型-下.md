@@ -9,3 +9,32 @@
 
 
 
+## 代码
+
+都在视频里讲了，看视频吧，多研究一下代码。
+
+代码结构：
+```
+├── job
+│   └── ParseLogJob.java
+└── mr
+    ├── LogBeanWritable.java
+    ├── LogFieldWritable.java
+    └── LogGenericWritable.java
+```
+
+链接：
+
+[ParseLogJob.java][1]
+
+[LogBeanWritable.java][2]
+
+[LogFieldWritable.java][3]
+
+[LogGenericWritable.java][4] 
+
+
+[1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/Hadoop%E7%9A%84IO%E6%A8%A1%E5%9E%8B-%E4%B8%8B/etl/src/main/com/bigdata/etl/job/ParseLogJob.java
+[2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/Hadoop%E7%9A%84IO%E6%A8%A1%E5%9E%8B-%E4%B8%8B/etl/src/main/com/bigdata/etl/mr/LogBeanWritable.java
+[3]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/Hadoop%E7%9A%84IO%E6%A8%A1%E5%9E%8B-%E4%B8%8B/etl/src/main/com/bigdata/etl/mr/LogFieldWritable.java
+[4]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/Hadoop%E7%9A%84IO%E6%A8%A1%E5%9E%8B-%E4%B8%8B/etl/src/main/com/bigdata/etl/mr/LogGenericWritable.java
