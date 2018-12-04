@@ -123,4 +123,8 @@ Tips：
 
 ## 实际操作
 
-略。。。。
+代码：
+
+- [ParseLogJob.java](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/Hadoop%E7%9A%84IO%E6%A8%A1%E5%9E%8B-%E4%B8%8A/etl/src/main/com/bigdata/etl/job/ParseLogJob.java)
+
+- [LogBeanWritable.java](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/Hadoop%E7%9A%84IO%E6%A8%A1%E5%9E%8B-%E4%B8%8A/etl/src/main/com/bigdata/etl/mr/LogBeanWritable.java)
