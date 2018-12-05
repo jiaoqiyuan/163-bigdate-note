@@ -17,12 +17,15 @@ ln -s hadoop-2.7.6 hadoop-current
 ```
 
 4. 添加HADOOP_HOME环境变量，老师讲的是直接将hadoop的目录添加到PATH，这里的方法本质一样，只不过同时配置了HADOOP_HOME环境变量：
+
 ```
 打开~/.bashrc文件，在文件末尾添加：
 # hadoop
 export HADOOP_HOME=/mnt/home/1015146591/hadoop-current
 export PATH=$HADOOP_HOME/bin:$PATH
+
 ```
+然后 source ~/.bashrc，使配置生效。
 
 5. 配置JAVA_HOME环境变量
 ```
