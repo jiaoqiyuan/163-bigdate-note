@@ -49,6 +49,8 @@
 
 7. [灵活配置Configuration][17]
 
+8. [精准控制Shuffle过程][18]
+
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81.md
@@ -67,3 +69,5 @@
 [15]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/Hadoop%E7%9A%84IO%E6%A8%A1%E5%9E%8B-%E4%B8%8B/Hadoop%E7%9A%84IO%E6%A8%A1%E5%9E%8B-%E4%B8%8B.md
 [16]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E5%AE%8C%E6%95%B4%E7%BC%96%E5%86%99Map%E5%92%8CReduce/%E5%AE%8C%E6%95%B4%E7%BC%96%E5%86%99Map%E5%92%8CReduce.md
 [17]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E7%81%B5%E6%B4%BB%E5%BA%94%E7%94%A8Configuration/%E7%81%B5%E6%B4%BB%E5%BA%94%E7%94%A8Configuration.md
+[18]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E7%B2%BE%E7%A1%AE%E6%8E%A7%E5%88%B6Shuffle%E8%BF%87%E7%A8%8B/%E7%B2%BE%E7%A1%AE%E6%8E%A7%E5%88%B6Shuffle%E8%BF%87%E7%A8%8B.md
+

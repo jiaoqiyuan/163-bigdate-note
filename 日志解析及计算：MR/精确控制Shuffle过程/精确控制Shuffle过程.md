@@ -87,7 +87,7 @@
 
 ## 实操
 
-[源码结构：]()
+[源码结构：](https://github.com/jiaoqiyuan/163-bigdate-note/tree/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E7%B2%BE%E7%A1%AE%E6%8E%A7%E5%88%B6Shuffle%E8%BF%87%E7%A8%8B/etl)
 ```
 ├── copyToBg0
 ├── etl.iml
