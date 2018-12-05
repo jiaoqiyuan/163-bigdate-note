@@ -2,10 +2,10 @@ package com.bigdata.etl.job;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bigdata.etl.mr.LogBeanWritable;
+import com.bigdata.etl.utils.IPUtil;
 import com.bigdata.etl.mr.LogFieldWritable;
 import com.bigdata.etl.mr.LogGenericWritable;
-import org.anarres.lzo.hadoop.codec.LzopCodec;
+//import org.anarres.lzo.hadoop.codec.LzopCodec;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -23,6 +23,7 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
+import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
@@ -66,9 +67,33 @@ public class ParseLogJob extends Configured implements Tool {
     }
 
     public static class LogReducer extends Reducer<LongWritable, LogGenericWritable, NullWritable, Text> {
+
+        public void setup(Context context) throws IOException, InterruptedException {
+            /* 添加分布式缓存后这些代码就可以去掉
+            Configuration conf = context.getConfiguration();
+            FileSystem fs = FileSystem.get(context.getConfiguration());
+//            Path ipFile = new Path("/user/1015146591/lib/17monipdb.dat");
+            Path ipFile = new Path(conf.get("ip.file.path"));
+            Path localPath = new Path(this.getClass().getResource("/").getPath());
+            fs.copyToLocalFile(ipFile, localPath);
+            */
+            IPUtil.load("17monipdb.dat");
+        }
+
         public void reduce(LongWritable key, Iterable<LogGenericWritable> values, Context context) throws IOException, InterruptedException {
             for (LogGenericWritable v : values ) {
-                context.write(null, new Text(v.asJsonString()));
+                String ip = (String)v.getObject("ip");
+                String[] address = IPUtil.find(ip);
+                JSONObject addr = new JSONObject();
+                addr.put("country", address[0]);
+                addr.put("province", address[1]);
+                addr.put("city", address[2]);
+
+                JSONObject datum = JSON.parseObject(v.asJsonString());
+                datum.put("address", addr);
+
+
+                context.write(null, new Text(datum.toJSONString()));
             }
         }
     }
@@ -76,6 +101,9 @@ public class ParseLogJob extends Configured implements Tool {
     public int run(String[] args) throws Exception {
         //创建job
         Configuration config = getConf();
+        //添加自定义配置
+//        config.set("ip.file.path", args[2]);
+        config.addResource("mr.xml");
         Job job = Job.getInstance(config);
         //通过job设置一些参数
         job.setJarByClass(ParseLogJob.class);
@@ -87,6 +115,9 @@ public class ParseLogJob extends Configured implements Tool {
         job.setMapOutputValueClass(LogWritable.class);
         job.setOutputValueClass(Text.class);
 
+        //添加分布式缓存
+        job.addCacheFile(new URI(config.get("ip.file.path")));
+
 
         //添加输入和输出数据
         FileInputFormat.addInputPath(job, new Path(args[0]));
@@ -94,8 +125,8 @@ public class ParseLogJob extends Configured implements Tool {
         FileOutputFormat.setOutputPath(job, outputPath);
 
         //设置压缩类型
-        FileOutputFormat.setCompressOutput(job, true);
-        FileOutputFormat.setOutputCompressorClass(job, LzopCodec.class);
+//        FileOutputFormat.setCompressOutput(job, true);
+//        FileOutputFormat.setOutputCompressorClass(job, LzopCodec.class);
 
         FileSystem fs = FileSystem.get(config);
         if (fs.exists(outputPath)) {

@@ -95,7 +95,7 @@ public class ParseLogJob extends Configured implements Tool {
 
     public int run(String[] args) throws Exception {
         //创建job
-        Configuration config = new Configuration();
+        Configuration config = getConf();
         Job job = Job.getInstance(config);
         //通过job设置一些参数
         job.setJarByClass(ParseLogJob.class);
@@ -114,8 +114,8 @@ public class ParseLogJob extends Configured implements Tool {
         FileOutputFormat.setOutputPath(job, outputPath);
 
         //设置压缩类型
-        FileOutputFormat.setCompressOutput(job, true);
-        FileOutputFormat.setOutputCompressorClass(job, LzopCodec.class);
+        // FileOutputFormat.setCompressOutput(job, true);
+        // FileOutputFormat.setOutputCompressorClass(job, LzopCodec.class);
 
         FileSystem fs = FileSystem.get(config);
         if (fs.exists(outputPath)) {

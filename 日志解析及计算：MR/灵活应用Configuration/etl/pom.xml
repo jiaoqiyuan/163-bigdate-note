@@ -20,11 +20,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.4</version>
         </dependency>
-        <!-- <dependency>
-            <groupId>org.anarres.lzo</groupId>
-            <artifactId>lzo-hadoop</artifactId>
-            <version>1.0.0</version>
-        </dependency> -->
+        <!--<dependency>-->
+            <!--<groupId>org.anarres.lzo</groupId>-->
+            <!--<artifactId>lzo-hadoop</artifactId>-->
+            <!--<version>1.0.0</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
@@ -49,6 +49,7 @@
                 </executions>
             </plugin>
         </plugins>
+
     </build>
 
     <!--使用国内阿里的maven镜像地址-->
