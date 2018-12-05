@@ -25,7 +25,6 @@ export HADOOP_HOME=/mnt/home/1015146591/hadoop-current
 export PATH=$HADOOP_HOME/bin:$PATH
 
 ```
-然后 source ~/.bashrc，使配置生效。
 
 5. 配置JAVA_HOME环境变量
 ```
@@ -34,6 +33,7 @@ export PATH=$HADOOP_HOME/bin:$PATH
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 ```
+然后 source ~/.bashrc，使配置生效。
 
 6. 配置hadoop-2.7.6/etc/hadoop/core-site.xml
 ```
