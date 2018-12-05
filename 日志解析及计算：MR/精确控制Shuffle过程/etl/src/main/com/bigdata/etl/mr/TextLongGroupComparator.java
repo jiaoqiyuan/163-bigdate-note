@@ -9,6 +9,7 @@ public class TextLongGroupComparator extends WritableComparator {
         super(TextLongWritable.class, true);
     }
 
+    @Override
     public int compare(WritableComparable a, WritableComparable b) {
         TextLongWritable textLongA = (TextLongWritable) a;
         TextLongWritable textLongB = (TextLongWritable) b;

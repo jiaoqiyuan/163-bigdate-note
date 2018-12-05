@@ -58,14 +58,17 @@ public class ParseLogJob extends Configured implements Tool {
     public static class LogMapper extends Mapper<LongWritable, Text, TextLongWritable, LogGenericWritable> {
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             try {
+                //解析每行日志
                 LogGenericWritable parsedLog = parseLog(value.toString());
+
+                //获取日志里的session_id和time_tag，然后写入TextLongWritable中传入reduce
                 String session = (String) parsedLog.getObject("session_id");
                 Long timeTag = (Long) parsedLog.getObject("time_tag");
-
                 TextLongWritable outKey = new TextLongWritable();
                 outKey.setText(new Text(session));
                 outKey.setCompareValue(new LongWritable(timeTag));
 
+                //写入reduce端
                 context.write(outKey, parsedLog);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -83,7 +86,9 @@ public class ParseLogJob extends Configured implements Tool {
         }
 
         public void reduce(TextLongWritable key, Iterable<LogGenericWritable> values, Context context) throws IOException, InterruptedException {
+            //获取session_id
             Text sid = key.getText();
+            //如果session_id为空或者session_id与sid不相等
             if (sessionID == null || !sid.equals(sessionID)) {
                 sessionID = new Text(sid);
                 actionPath.clear();

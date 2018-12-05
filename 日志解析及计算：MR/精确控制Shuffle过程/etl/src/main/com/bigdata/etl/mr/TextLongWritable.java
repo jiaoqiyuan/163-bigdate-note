@@ -9,6 +9,9 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+/**
+ * 将map端的session_id和timg_tag两个变量值作为一个整体传递到reduce端
+ */
 public class TextLongWritable implements WritableComparable<TextLongWritable>{
 
     private Text text;
