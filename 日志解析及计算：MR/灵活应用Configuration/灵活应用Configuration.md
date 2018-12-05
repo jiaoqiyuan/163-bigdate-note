@@ -12,11 +12,7 @@
 
 - Mapper和Reducer之间不能传递参数，如果在Mapper端设置Configuration参数，那么在Reducer端是无法获取到这个参数的。
 
-    ```mermaid
-    graph LR;
-    Job-->|Configuration|Mapper;
-    Job-->|Configuration|Redecer;
-    ```
+    ![Job配置][1]
 
 ## Configuration加载顺序
 
@@ -46,13 +42,8 @@ MR中的配置参数分两种：一种是不可覆盖的，一种是可覆盖的
 
 - Java中可以使用addCacheFile将用户自定义的配置文件上传到分布式缓存上，在各个执行节点只需要使用文件名就可以访问这些文件。
 
-```mermaid
-graph LR
-Job_Client --> |文件归档| HDFS
-HDFS --> |文件归档| Node1
-HDFS --> |文件归档| Node2
-HDFS --> |文件归档| Node3
-```
+    ![Configuration][2]
+
 ## 实操
 
 - MR中的Configuration和分布式缓存在实际案例中是如何运用的。
@@ -87,3 +78,5 @@ etl
                         └── job
 ```
 
+[1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/img/Job%E9%85%8D%E7%BD%AE%E7%A4%BA%E6%84%8F%E5%9B%BE.png
+[2]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/img/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E7%A4%BA%E6%84%8F%E5%9B%BE.png
