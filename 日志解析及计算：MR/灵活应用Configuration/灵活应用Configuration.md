@@ -55,5 +55,35 @@ HDFS --> |文件归档| Node3
 ```
 ## 实操
 
-MR中的Configuration和分布式缓存在实际案例中是如何运用的。
+- MR中的Configuration和分布式缓存在实际案例中是如何运用的。
+
+- [代码结构：](https://github.com/jiaoqiyuan/163-bigdate-note/tree/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E7%81%B5%E6%B4%BB%E5%BA%94%E7%94%A8Configuration/etl)
+
+```
+etl
+├── copyToBg0
+├── etl.iml
+├── pom.xml
+└── src
+    ├── main
+    │   ├── com
+    │   │   └── bigdata
+    │   │       └── etl
+    │   │           ├── job
+    │   │           │   └── ParseLogJob.java
+    │   │           ├── mr
+    │   │           │   ├── LogBeanWritable.java
+    │   │           │   ├── LogFieldWritable.java
+    │   │           │   └── LogGenericWritable.java
+    │   │           └── utils
+    │   │               └── IPUtil.java
+    │   └── resources
+    │       └── mr.xml
+    └── test
+        └── java
+            └── com
+                └── bigdata
+                    └── etl
+                        └── job
+```
 
