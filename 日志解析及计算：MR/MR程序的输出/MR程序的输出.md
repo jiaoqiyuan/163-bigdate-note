@@ -92,4 +92,4 @@ public abstract class RecordWriter<K, V> {
 
 ## 实操
 
-[源码地址]()
+[源码地址](https://github.com/jiaoqiyuan/163-bigdate-note/tree/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/MR%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BE%93%E5%87%BA/etl)
