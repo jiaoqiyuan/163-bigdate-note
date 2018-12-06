@@ -183,3 +183,7 @@ Map:Key/Value
 - 如果文件比较小，一个文件对应一个map，如果有大量小文件，会产生大量map，但是每个map的计算量很小，严重浪费集群资源。
 
 - CombineFileInputFormat将小文件合并到一个map中，避免资源浪费。
+
+## 实操
+
+[源码地址](https://github.com/jiaoqiyuan/163-bigdate-note/tree/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/MR%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BE%93%E5%85%A5/etl)
