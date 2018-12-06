@@ -53,7 +53,7 @@ Map2 --> Output2
 Map3 --> Output3
 ```
 
-[MapJoin示意图][1]
+![MapJoin示意图][1]
 
 - MR启动时可以将HDFS上的小文件放到分布式缓存中,也就是Distribute Cache中.
 
@@ -73,7 +73,7 @@ Map3 --> Output3
 
 - 在Reduce端将相同的Key值的数据关联起来.
 
-[Reduce Join][2]
+![Reduce Join][2]
 
 ## 一对多关联的优化
 
