@@ -89,6 +89,6 @@ Map3 --> Output3
 
     通用关联方法,可能发生数据倾斜.
 
-[1]:
-[2]:
+[1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/img/MapJoin%E7%A4%BA%E6%84%8F%E5%9B%BE.png
+[2]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/img/ReduceJoin%E7%A4%BA%E6%84%8F%E5%9B%BE.png
 
