@@ -53,7 +53,7 @@
 
 9. [MR程序的输入][19]
 
-10.[MR程序的输出][20]
+10. [MR程序的输出][20]
 
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
