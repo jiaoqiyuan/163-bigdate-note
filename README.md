@@ -59,6 +59,10 @@
 
 12. [MR实现关联操作][22]
 
+13. [MR参数调优][23]
+
+14. [数据倾斜][24]
+
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81.md
@@ -81,4 +85,6 @@
 [19]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/MR%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BE%93%E5%85%A5/MR%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BE%93%E5%85%A5.md
 [20]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/MR%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BE%93%E5%87%BA/MR%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BE%93%E5%87%BA.md
 [21]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E7%AE%80%E5%8D%95%E5%A5%BD%E7%94%A8%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/%E7%AE%80%E5%8D%95%E5%A5%BD%E7%94%A8%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8.md
-[22]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/MR%E5%AE%9E%E7%8E%B0%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C/MR%E5%AE%9E%E7%8E%B0%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C.md
+[22]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/MR%E5%AE%9E%E7%8E%B0%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C.md
+[23]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/MR%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98.md
+[24]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.md
