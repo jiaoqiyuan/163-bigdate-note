@@ -79,6 +79,14 @@ Map3 --> Output3
 
 - 使用二次排序,对数据表标识符排序,避免将数据多的那张表的数据缓存在内存中.减少内存使用,避免OOM(Out of Memory)
 
+![一对多关联优化][3]
+
+## 问题
+
+多对多场景下,如果也这样进行二次排序的话,会不会使程序也能得到优化呢?
+
+我觉得能优化一点吧,应为多对多嘛,二次排序后可以缓存较少的那个表信息,然后与其他的表进行关联操作.相对于不进行二次排序,直接缓存第一个数据中相关的表信息,会起到一定的优化作用.当然如果两个表大小相等,那么二次排序是不能起到任何优化作用的,甚至应为排序耗费了一定资源会起到相反的作用.(个人见解,不知道对不对.)
+
 ## 总结
 
 - Map Join
@@ -91,4 +99,5 @@ Map3 --> Output3
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/img/MapJoin%E7%A4%BA%E6%84%8F%E5%9B%BE.png
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/img/ReduceJoin%E7%A4%BA%E6%84%8F%E5%9B%BE.png
+[3]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/img/%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%85%B3%E8%81%94%E4%BC%98%E5%8C%96.png
 
