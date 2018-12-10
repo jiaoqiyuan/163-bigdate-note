@@ -32,8 +32,8 @@ public class ParseLogJob extends Configured implements Tool {
 
     public static LogGenericWritable parseLog(String row) throws ParseException {
         String[] logPart = StringUtils.split(row, "\u1111");
-        SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        long timeTag = dataFormat.parse(logPart[0]).getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        long timeTag = dateFormat.parse(logPart[0]).getTime();
 
         String activeName = logPart[1];
 
