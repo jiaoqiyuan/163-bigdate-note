@@ -1,6 +1,8 @@
 # 搭建本地测试环境
 
-- 下载hadoop安装包，（通过Xftp下载）
+    这里是linux环境，MAC环境类似，也可以参考，但是windows环境不能这样搭，具体windows下怎么搭不太清楚，也没必要在windows下搭，大数据生产环境没有用windows的吧。
+
+- 下载hadoop安装包。
 
 - 解压后创建hadoop-current软连接(我是在我的～目录下操作的，我把hadoop解压到了/home/jony/apps目录中)
     ```
