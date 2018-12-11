@@ -1,2 +1,0 @@
-#!/bin/bash
-sudo scp -i /home/jony/bigdata/1015146591 target/etl-1.0-jar-with-dependencies.jar 1015146591@10.173.32.5:/mnt/home/1015146591/jars

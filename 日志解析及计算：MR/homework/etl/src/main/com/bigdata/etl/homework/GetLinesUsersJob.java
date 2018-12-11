@@ -36,7 +36,7 @@ public class GetLinesUsersJob extends Configured implements Tool{
                 //解析每行日志
                 String user = parseLog(value.toString());
 
-                //写入reduce端
+                //写入reduce端,使用Text("test")进行占位，本想使用null占位，但是reduce端需要遍历Map的输出，所以不能使用NullWritable
                 context.write(new Text(user), new Text("test"));
             } catch (Exception e) {
                 errorCounter.increment(1);
