@@ -7,6 +7,8 @@
 
 2. [学习的方法论](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%BB%BC%E8%BF%B0/%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA.md)
 
+3. [分布式系统可扩展性](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%BB%BC%E8%BF%B0/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7.md)
+
 ----
 
 ## 数据存储：HDFS
