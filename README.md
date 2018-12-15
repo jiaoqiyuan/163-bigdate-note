@@ -1,5 +1,6 @@
 # 网易云课堂大数据笔记
 
+![](https://img.shields.io/badge/language-java-orange.svg)
 
 ## 数据平台综述
 

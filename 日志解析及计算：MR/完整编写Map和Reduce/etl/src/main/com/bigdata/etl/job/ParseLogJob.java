@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bigdata.etl.utils.IPUtil;
 import com.bigdata.etl.mr.LogFieldWritable;
 import com.bigdata.etl.mr.LogGenericWritable;
-import org.anarres.lzo.hadoop.codec.LzopCodec;
+//import org.anarres.lzo.hadoop.codec.LzopCodec;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -69,7 +69,7 @@ public class ParseLogJob extends Configured implements Tool {
 
         public void setup(Context context) throws IOException, InterruptedException {
             FileSystem fs = FileSystem.get(context.getConfiguration());
-            Path ipFile = new Path("/user/1015146591/lib/17monipdb.dat");
+            Path ipFile = new Path("/user/hadoop/lib/17monipdb.dat");
             Path localPath = new Path(this.getClass().getResource("/").getPath());
             fs.copyToLocalFile(ipFile, localPath);
             IPUtil.load("17monipdb.dat");
