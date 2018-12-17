@@ -71,6 +71,16 @@
 
 1. [日志及日志收集系统介绍][25]
 
+2. [Flume Agent组成][26]
+
+3. [Flume支持的组件类型][27]
+
+4. [Flume基本配置][28]
+
+5. [Flume部署][29]
+
+6. [Flume配置示例][30]
+
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81.md
@@ -97,3 +107,8 @@
 [23]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/MR%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98.md
 [24]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90%E5%8F%8A%E8%AE%A1%E7%AE%97%EF%BC%9AMR/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.md
 [25]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9AFlume/%E6%97%A5%E5%BF%97%E5%8F%8A%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E7%B3%BB%E7%BB%9F.md
+[26]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9AFlume/Flume%20Agent%E7%9A%84%E7%BB%84%E6%88%90.md
+[27]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9AFlume/Flume%E6%94%AF%E6%8C%81%E7%9A%84%E7%BB%84%E5%BB%BA%E7%B1%BB%E5%9E%8B.md
+[28]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9AFlume/Flume%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE.md
+[29]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9AFlume/Flume%E5%AE%89%E8%A3%85%E5%92%8C%E9%83%A8%E7%BD%B2.md
+[30]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9AFlume/Flume%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B.md 
