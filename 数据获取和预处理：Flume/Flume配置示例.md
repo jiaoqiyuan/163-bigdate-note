@@ -13,7 +13,7 @@
 
 - 配置flume-conf-netsrc.properties文件
 
-    ```
+    ```conf
     agent.sources = netSrc
     agent.channels = memoryChannel
     agent.sinks = loggerSink
@@ -160,7 +160,7 @@
 
 - 监听服务器文件，输出到HDFS
 
-    ```
+    ```conf
     Source.type = taildir
     Channel.type = memory
     Sink.type = hdfs
@@ -176,7 +176,7 @@
 
 - 配置flume
 
-    ```
+    ```conf
     agent.sources = fileSrc
     agent.channels = memoryChannel
     agent.sinks = hdfsSink
@@ -237,7 +237,7 @@
 
 - 监听服务器文件，输出到hdfs（file channel）
 
-    ```
+    ```conf
     Source.type = taildir
     Channel.type = file
     Sink.type = hdfs
@@ -249,7 +249,7 @@
 
 - 配置flume
 
-    ```
+    ```conf
     agent.sources = fileSrc
     agent.channels = fileChannel
     agent.sinks = hdfsSink
