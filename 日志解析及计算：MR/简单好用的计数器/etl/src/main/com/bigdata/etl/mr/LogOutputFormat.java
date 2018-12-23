@@ -95,7 +95,6 @@ public class LogOutputFormat<K, V> extends TextOutputFormat<K, V> {
             Configuration conf = job.getConfiguration();
 
             if (isCompressed) {
-                getOutputCompressorClass(job, GzipCodec.class);
                 Class<? extends CompressionCodec > codecClass = getOutputCompressorClass(job, GzipCodec.class);
                 CompressionCodec codec = ReflectionUtils.newInstance(codecClass, conf);
 
