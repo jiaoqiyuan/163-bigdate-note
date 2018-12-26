@@ -89,7 +89,7 @@
 
     ./bin/flume-ng agent --conf conf --conf-file conf/conf.properties --name agent -Dflume.root.logger=INFO,console
     ```
-- 配置flume-conf-netsrc.properties文件
+- 配置flume-conf-netsrc2localfile.properties文件
 
     ```conf
     agent.sources = netSrc
