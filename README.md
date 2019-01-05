@@ -91,6 +91,9 @@
 
 2. [Hive解决了什么问题](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/Hive%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98.md)
 
+3. [Hive擅长什么](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/Hive%E6%93%85%E9%95%BF%E4%BB%80%E4%B9%88.md)
+
+4. [Hive结构与数据仓库](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/Hive%E6%9C%BA%E6%9E%84%E4%B8%8E%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93.md)
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81.md
