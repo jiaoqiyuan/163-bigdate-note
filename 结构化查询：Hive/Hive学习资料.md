@@ -783,7 +783,8 @@
     0.6216099682706644
     ```
 
- 23. 反正弦函数：acos
+
+23. 反正弦函数：acos
 
     语法：acos(double a)
 
@@ -1628,7 +1629,7 @@
 
     举例：
 
-11.  中位数函数: percentile
+11. 中位数函数: percentile
 
     语法: percentile(BIGINT col, array(p1 [, p2]…))
 
@@ -1642,7 +1643,7 @@
     select percentile(score,<0.2,0.4>) from lxw_dual； 取 0.2，0.4 位置的数据
     ```
 
-12.  近似中位数函数: percentile_approx
+12. 近似中位数函数: percentile_approx
 
     语法: percentile_approx(DOUBLE col, p [, B])
 
@@ -1652,7 +1653,7 @@
 
     举例：
 
-13.  近似中位数函数: percentile_approx
+13. 近似中位数函数: percentile_approx
 
     语法: percentile_approx(DOUBLE col, array(p1 [, p2]…) [, B])
 
@@ -1662,7 +1663,7 @@
 
     举例：
 
-14.  直方图: histogram_numeric
+14. 直方图: histogram_numeric
 
     语法: histogram_numeric(col, b)
 
@@ -1679,7 +1680,7 @@
 
 ## 复合类型构建函数
 
-    1. Map  类型构建: map
+1. Map  类型构建: map
 
     语法: map (key1, value1, key2, value2, …)
 
