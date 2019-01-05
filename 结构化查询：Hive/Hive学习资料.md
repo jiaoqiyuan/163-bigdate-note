@@ -1809,9 +1809,9 @@
     ```
     hive> select size(array('100','101','102','103')) from lxw_dual;
     4
-```
+    ```
 
-3.  类型转换函数: cast
+3. 类型转换函数: cast
 
     语法: cast(expr as <type>)
 

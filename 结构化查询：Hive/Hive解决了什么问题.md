@@ -1,6 +1,6 @@
 ## 从MR到Hive
 
-![Hadoop生态系统]()
+![Hadoop生态系统](https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/img/Hadoop%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F.png)
 
 Hadoop的核心是HDFS和MapReduce计算框架。HDFS是分布式文件系统，是Hadoop文件存储和管理的基础。MR是计算引擎，承担Hadoop下的计算任务。
 
