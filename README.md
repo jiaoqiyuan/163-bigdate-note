@@ -105,15 +105,19 @@
 
 9. [子查询和关联表][41]
 
-10. [利用正则表达式精确提取信息][42]
+10. [使用简单函数][42]
 
-11. [窗口函数的使用][43]
+10. [使用聚合函数][43]
 
-12. [行转列与列转行][44]
+10. [利用正则表达式精确提取信息][44]
 
-13. [用户自定义函数（UDF）的使用][45]
+11. [窗口函数的使用][45]
 
-14. [Hive优化案例][46]
+12. [行转列与列转行][46]
+
+13. [用户自定义函数（UDF）的使用][47]
+
+14. [Hive优化案例][48]
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81.md
