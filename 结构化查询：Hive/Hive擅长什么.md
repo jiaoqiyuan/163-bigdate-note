@@ -41,3 +41,4 @@
 ![海量结构化数据分析](https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/img/%E6%B5%B7%E9%87%8F%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90.png)
 
 要进行数据分析通常是先使用Sqoop工具将关系型数据库中的数据导入到HDFS，之后根据统计分析业务需要，通过Hive对数据进行处理，存储成方便后续业务分析的格式。这就是数据仓库的场景。
+
