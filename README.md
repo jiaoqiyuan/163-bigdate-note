@@ -105,6 +105,16 @@
 
 9. [子查询和关联表][41]
 
+10. [利用正则表达式精确提取信息][42]
+
+11. [窗口函数的使用][43]
+
+12. [行转列与列转行][44]
+
+13. [用户自定义函数（UDF）的使用][45]
+
+14. [Hive优化案例][46]
+
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81.md
 [3]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/YARN%E9%85%8D%E7%BD%AE.md
@@ -146,3 +156,5 @@
 [39]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/%E5%88%9B%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86Hive%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93.md
 [40]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/%E5%86%99%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5.md
 [41]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/%E5%AD%90%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%85%B3%E8%81%94%E8%A1%A8.md
+[42]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/%E4%BD%BF%E7%94%A8%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0.md
+[43]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/%E4%BD%BF%E7%94%A8%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0.md
