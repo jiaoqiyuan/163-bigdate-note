@@ -73,6 +73,7 @@
     复制hive-default.xml.template为hive-site.xml，在configuration中最后添加两个property
 
     ```conf
+
     <property>
         <name>system:java.io.tmpdir</name>
         <value>/mnt/home/1015146591/apps/hive-1.2.2/tmp</value>
@@ -82,6 +83,17 @@
         <name>system:user.name</name>
         <value>1015146591</value>
     </property>
+    ```
+
+    另外修改一下hive-site.xml中hive.metastore.warehouse.dir的值，这个值表示回头你创建的数据库在HDFS上的存放位置：
+
+    ```
+    <property>
+        <name>hive.metastore.warehouse.dir</name>
+        <value>/user/1015146591/warehouse</value>
+        <description>location of default database for the warehouse</description>
+    </property>
+
     ```
 
 - 启动hive（z在hive目录下启动）
