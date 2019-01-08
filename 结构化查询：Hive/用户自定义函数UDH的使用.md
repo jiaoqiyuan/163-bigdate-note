@@ -261,6 +261,6 @@ case...when...
 
 ## 工程代码
 
-[点这里][1]
+工程代码：[**点这里**][1] 。
 
-[1]: 
+[1]: https://github.com/jiaoqiyuan/163-bigdate-note/tree/master/%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%9AHive/etl
