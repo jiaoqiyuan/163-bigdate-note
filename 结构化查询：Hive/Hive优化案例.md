@@ -103,13 +103,17 @@ where
 
 ```sql
 select
-    user_id,
     count(1)
 from
-    bigdata.weblog
-where
-    active_name = 'order'
-group by
-    user_id
+    (select
+        user_id,
+        count(1)
+    from
+        bigdata.weblog
+    where
+        active_name = 'order'
+    group by
+        user_id
+    ) t1
 ```
 
