@@ -122,21 +122,21 @@
 
 ## 数据获取和预处理：Sqoop
 
-1. [业务系统数据]()
+1. [业务系统数据](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE.md)
 
-2. [数据同步与传统数据仓库]()
+2. [数据同步与传统数据仓库](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BC%A0%E7%BB%9F%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93.md)
 
-3. [Sqoop功能与架构]()
+3. [Sqoop功能与架构](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/Sqoop%E5%8A%9F%E8%83%BD%E4%B8%8E%E6%9E%B6%E6%9E%84.md)
 
-4. [数据划分]()
+4. [数据划分](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/%E6%95%B0%E6%8D%AE%E5%88%92%E5%88%86.md)
 
-5. [Java Hadoop-client等基础依赖安装]()
+5. [Java Hadoop-client等基础依赖安装](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/Java%20Hadoop-client%E7%AD%89%E5%9F%BA%E7%A1%80%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85.md)
 
-6. [sqoop服务安装]()
+6. [sqoop服务安装](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/sqoop%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85.md)
 
-7. [语法分析]()
+7. [语法分析](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90.md)
 
-8. [案例]()
+8. [案例](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/%E6%A1%88%E4%BE%8B.md)
 
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
