@@ -119,6 +119,26 @@
 
 14. [Hive优化案例][48]
 
+
+## 数据获取和预处理：Sqoop
+
+1. [业务系统数据]()
+
+2. [数据同步与传统数据仓库]()
+
+3. [Sqoop功能与架构]()
+
+4. [数据划分]()
+
+5. [Java Hadoop-client等基础依赖安装]()
+
+6. [sqoop服务安装]()
+
+7. [语法分析]()
+
+8. [案例]()
+
+
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81.md
 [3]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/YARN%E9%85%8D%E7%BD%AE.md
