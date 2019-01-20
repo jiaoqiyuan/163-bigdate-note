@@ -74,7 +74,7 @@ Sqoop也使用类似的机制，在导入导出前会现根据数据库的数据
 上面的Hive的建表语句和rawdata语句都会被写入到一个script脚本中，最后会sqoop启动.hive命令执行刚刚生成的script脚本，提交Hive任务，完成Hive导出。
 
 
-[1]: 
-[2]:
-[3]: 
-[4]: 
+[1]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/img/Sqoop%E6%A1%86%E6%9E%B6.png
+[2]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/img/Sqoop%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png
+[3]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/img/%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1%E7%94%9F%E6%88%90.png
+[4]: https://github.com/jiaoqiyuan/163-bigdate-note/raw/master/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ASqoop/img/Hive%E5%AF%BC%E5%85%A5.png
