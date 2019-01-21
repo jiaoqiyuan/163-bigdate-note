@@ -13,7 +13,7 @@ OpenJDK 64-Bit Server VM (build 25.171-b10, mixed mode)
 2. 启动Hadoop自带MapReduce示例程序：
 
 ```bash
-
+hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.6.jar pi 2 2
 ```
 
 OK，都可以运行就好。
