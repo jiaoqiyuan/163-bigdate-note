@@ -108,3 +108,11 @@
     default
     Time taken: 1.293 seconds, Fetched: 1 row(s)
     ```
+
+- 添加Hive到环境变量，在~/.bashrc中配置如下（根据自己Hive的安装路径进行配置）：
+
+    ```
+    # HIVE
+    export HIVE_HOME=/mnt/home/1015146591/apps/hive-1.2.2
+    export PATH=$HIVE_HOME/bin:$PATH
+    ```
