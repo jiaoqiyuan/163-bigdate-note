@@ -45,6 +45,8 @@ tar xzvf sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C ~/apps
     #Set path to where hadoop-*-core.jar is available
     export HADOOP_MAPRED_HOME=${HADOOP_HOME}
     export HADOOP_HDFS_HOME=${HADOOP_HOME}
+    export HIVE_HOME=/mnt/home/1015146591/apps/hive-1.2.2
+    export PATH=$HIVE_HOME/bin:$PATH
     ```
 
     老师的配置方法是：
