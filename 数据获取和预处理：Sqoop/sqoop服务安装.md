@@ -46,6 +46,8 @@ tar xzvf sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C ~/apps
     export HADOOP_MAPRED_HOME=${HADOOP_HOME}
     export HADOOP_HDFS_HOME=${HADOOP_HOME}
     export HIVE_HOME=/mnt/home/1015146591/apps/hive-1.2.2
+    export HIVE_CONF_DIR=$HIVE_HOME/conf
+    export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:$HIVE_HOME/lib
     export PATH=$HIVE_HOME/bin:$PATH
     ```
 
@@ -59,6 +61,8 @@ tar xzvf sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C ~/apps
     export HADOOP_HDFS_HOME=${HADOOP_HOME}
     export HADOOP_MAPRED_HOME=${HADOOP_HOME}
     ```
+
+    复制Hive的配置文件hive-site.xml到sqoop的conf目录下，否则可能会报 Hive 数据库没有建立的错误。
 
 3. 连接数据库：
 
@@ -85,9 +89,9 @@ tar xzvf sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C ~/apps
 
 1. 下载MySQL的JDBC驱动: [mysql-connector-java-5.1.47.tar.gz][2]，我在官网只找到了5.1.47的版本，不知道能不能使用，也可以直接从老师的sqoop目录下拷贝：
 
-```
-cp /home/hadoop/sqoop-1.4.7.bin__hadoop-2.6.0/lib/mysql-connector-java-5.1.46.jar .
-```
+    ```
+    cp /home/hadoop/sqoop-1.4.7.bin__hadoop-2.6.0/lib/mysql-connector-java-5.1.46.jar .
+    ```
 
 2. 执行sqoop命令验证安装是否成功：
 
