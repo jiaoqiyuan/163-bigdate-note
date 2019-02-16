@@ -142,7 +142,23 @@
 
 1. [调度系统背景知识](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/1.%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86.md)
 
-2. [Azkaban系统介绍]()
+2. [Azkaban系统介绍](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/2.Azkaban%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D.md)
+
+3. [代码下载、编译、部署](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/3.%E4%BB%A3%E7%A0%81%E4%B8%8B%E8%BD%BD%E3%80%81%E7%BC%96%E8%AF%91%E3%80%81%E9%83%A8%E7%BD%B2.md)
+
+4. [插件的安装hadoopjava、spark等](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/4.%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85hadoopjava%E3%80%81spark%E7%AD%89.md)
+
+5. [插件的使用要素和DAG设计](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/5.%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A6%81%E7%B4%A0%E5%92%8CDAG%E8%AE%BE%E8%AE%A1.md)
+
+6. [不同调度参数详解](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/6.%E4%B8%8D%E5%90%8C%E8%B0%83%E5%BA%A6%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3.md)
+
+7. [Azkaban任务编写](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/7.Azkaban%E4%BB%BB%E5%8A%A1%E7%BC%96%E5%86%99.md)
+
+8. [如何实现web高可用](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/8.%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0web%E9%AB%98%E5%8F%AF%E7%94%A8.md)
+
+9. [如何提高任务可用性](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/9.%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E4%BB%BB%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7.md)
+
+10. [如何增加新的插件类型](https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%EF%BC%9AAzkaban/10.%E5%A6%82%E4%BD%95%E5%A2%9E%E5%8A%A0%E6%96%B0%E7%9A%84%E6%8F%92%E4%BB%B6%E7%B1%BB%E5%9E%8B.md)
 
 [1]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md
 [2]: https://github.com/jiaoqiyuan/163-bigdate-note/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9AHDFS/HDFS%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81.md
