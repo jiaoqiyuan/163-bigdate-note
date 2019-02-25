@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo openvpn --config vpn_yktceshi@163.com.ovpn &
