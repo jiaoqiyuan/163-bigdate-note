@@ -1,4 +1,4 @@
-## 实例一
+## 实例一 监听端口，输出到控制台
 
 - 监听端口，输出到控制台
 
@@ -76,7 +76,7 @@
     2018-12-17 15:12:06,454 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:95)] Event: { headers:{} body: 77 6F 72 6C 64 0D                               world. }
     ```
 
-## 示例二
+## 示例二 监听端口，输出到服务器文件
 
 - 监听端口，输出到服务器文件
 
@@ -156,7 +156,7 @@
 
     60秒后，该目录下又生成了一个文件1545031636278-2
 
-## 示例三
+## 示例三 监听服务器文件，输出到HDFS（memChannel）
 
 - 监听服务器文件，输出到HDFS
 
@@ -233,7 +233,7 @@
 
     ```
 
-## 示例4
+## 示例4 监听服务器文件，输出到HDFS（fileChannel）
 
 - 监听服务器文件，输出到hdfs（file channel）
 
