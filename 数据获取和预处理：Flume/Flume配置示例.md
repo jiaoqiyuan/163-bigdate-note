@@ -247,7 +247,7 @@
     ./bin/flume-ng agent --conf conf --conf-file conf/conf.properties --name agen
     ```
 
-- 配置flume
+- 配置flume,flume-conf-taildir2hdfs-filech.properties
 
     ```conf
     agent.sources = fileSrc
@@ -257,7 +257,7 @@
     # For each one of the sources, the type is defined
     agent.sources.fileSrc.type = taildir
     #agent.sources.fileSrc.positionFile = /mnt/home/1139372816/workspace/hdfs_sink/mem_ch/positionFile
-    agent.sources.fileSrc.positionFile = /mnt/home/1015146591/flume_log/hdfs_sink/file_ch/positionFile
+    agent.sources.fileSrc.positionFile = /mnt/home/1015146591/workspace/hdfs_sink/file_ch/positionFile
     agent.sources.fileSrc.filegroups = f1
     agent.sources.fileSrc.filegroups.f1 = /mnt/hadoop/log/.*.log
 
