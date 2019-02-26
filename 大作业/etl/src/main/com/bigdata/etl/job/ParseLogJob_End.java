@@ -12,6 +12,7 @@ import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Counter;
 import org.apache.hadoop.mapreduce.Job;
@@ -22,12 +23,14 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 //import org.anarres.lzo.hadoop.codec.LzopCodec;
@@ -91,10 +94,13 @@ public class ParseLogJob_End extends Configured implements Tool {
     public static class LogReducer extends Reducer<TextLongWritable, LogGenericWritable, Text, Text> {
         private Text sessionID;
         private JSONArray actionPath = new JSONArray();
+        //添加多输出
+        private MultipleOutputs outputs;
 
         public void setup(Context context) throws IOException, InterruptedException {
 
             IPUtil.load("17monipdb.dat");
+            outputs = new MultipleOutputs(context);
         }
 
         public void reduce(TextLongWritable key, Iterable<LogGenericWritable> values, Context context) throws IOException, InterruptedException {
@@ -106,7 +112,9 @@ public class ParseLogJob_End extends Configured implements Tool {
                 actionPath.clear();
             }
 
-            String time_tag = key.getCompareValue().toString();
+            Long timeStamp = key.getCompareValue().get();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String time_tag = sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
 
             for (LogGenericWritable v : values) {
                 JSONObject datum = JSON.parseObject(v.asJsonString());
@@ -131,9 +139,14 @@ public class ParseLogJob_End extends Configured implements Tool {
                     datum.put("action_path", actionPath);
 
                 }
-                String outputKey = v.getObject("error_flag") == null ? "2015/part" : "error/part";
-                context.write(new Text(outputKey), new Text(datum.toJSONString()));
+                //String outputKey = v.getObject("error_flag") == null ? "part" : "error/part";
+                //context.write(new Text(outputKey), new Text(datum.toJSONString()));
+                outputs.write(NullWritable.get(), new Text(datum.toJSONString()), "day="+time_tag+"/part");
             }
+        }
+
+        public void cleanup(Context context) throws IOException, InterruptedException {
+            outputs.close();
         }
     }
 
@@ -162,7 +175,7 @@ public class ParseLogJob_End extends Configured implements Tool {
         job.addCacheFile(new URI(config.get("ip.file.path")));
 
         //设置OutputFormat
-        job.setOutputFormatClass(LogOutputFormat.class);
+//        job.setOutputFormatClass(LogOutputFormat.class);
 
 
         //设置压缩类型
@@ -174,6 +187,9 @@ public class ParseLogJob_End extends Configured implements Tool {
         FileStatus[] fileStatuses = fs.listStatus(new Path(args[0]));
         for (int i = 0; i < fileStatuses.length; i++) {
             MultipleInputs.addInputPath(job, fileStatuses[i].getPath(), TextInputFormat.class, LogMapper.class);
+            String inputPath = fileStatuses[i].getPath().toString();
+            String dir_name = inputPath.substring(inputPath.lastIndexOf('/')+1);
+            System.out.println(dir_name);
         }
 
         Path outputPath = new Path(args[1]);
