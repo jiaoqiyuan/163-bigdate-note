@@ -1,0 +1,5 @@
+/mnt/home/1015146591/apps/sqoop-1.4.7.bin__hadoop-2.6.0/bin/sqoop import --connect "jdbc:mysql://10.173.32.6:3306/sqoop? characterEncoding=UTF-8&useCursorFetch=true" --username root --password Gg/ru,.#5 --table member --target-dir "/user/1015146591/sqooptest" --hive-import --hive-table bigdata.member --hive-overwrite
+
+insert into member values('890896817062', '女', '0001531898489613', '茵', '叶茵', 'IPhone', '1518602993902')
+
+/mnt/home/1015146591/apps/sqoop-1.4.7.bin__hadoop-2.6.0/bin/sqoop import --connect "jdbc:mysql://10.173.32.6:3306/sqoop? characterEncoding=UTF-8&useCursorFetch=true" --username root --password Gg/ru,.#5 --table member --target-dir "/user/1015146591/sqooptest" --hive-import --hive-table bigdata.member --check-column user_id --incremental append --last-value 9991531898406795
