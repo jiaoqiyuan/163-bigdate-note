@@ -184,24 +184,41 @@ select sum(pay_amount) from orders;
 计算member表中user_id的个数就可以了吧
 
 ```sql
-select count(user_id) from member;
+select count(distinct user_id) from member where from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd') = from_unixtime(unix_timestamp(),'yyyy-MM-dd');
 30180
 ```
 
 将所有查询信息放入一个sql中
 
 ```sql
-create table if not exists `bigdata.puoir`
-as 
-select 
-    pv, uv, order_num, income, register_num
-from
-    (select count(req_url) as pv from weblog) q1,
-    (select count(distinct user_id) as uv from weblog) q2,
-    (select count(distinct order_id) as order_num from orders) q3,
-    (select sum(pay_amount) as income from orders) q4,
-    (select count(user_id) as register_num from member) q5;
+SELECT r1.pv, r1.uv, r1.order_count, r2.income, r3.register_count
+FROM (
+	SELECT COUNT(req_url) AS pv, COUNT(DISTINCT user_id) AS uv
+		, COUNT(DISTINCT order_id) AS order_count
+	FROM weblog
+	WHERE day = from_unixtime(unix_timestamp(), 'yyyy-MM-dd')
+) r1, (
+		SELECT SUM(pay_amount) AS income
+		FROM orders
+		WHERE from_unixtime(CAST(substring(order_time, 1, 10) AS bigint), 'yyyy-MM-dd') = from_unixtime(unix_timestamp(), 'yyyy-MM-dd')
+	) r2, (
+		SELECT COUNT(user_id) AS register_count
+		FROM member
+		WHERE from_unixtime(CAST(substring(register_time, 1, 10) AS bigint), 'yyyy-MM-dd') = from_unixtime(unix_timestamp(), 'yyyy-MM-dd')
+	) r3
 2175228	100569	15104	939095.0	30180
+```
+
+创建新表：
+```sql
+create table if not exists `bigdata.puoir` (
+    `day`           string      comment     '日期',
+    `pv`            bigint      comment     'PV',
+    `uv`            bigint      comment     'UV',
+    `order_count`   bigint      comment     '订单量',
+    `income`        double      comment     '收入',
+    `regitster_count`   bigint  comment     '注册用户数'
+);
 ```
 
 ## 2. 计算访问product页面的用户中，有多少比例在30分钟内下单并且支付成功对应的商品
@@ -212,14 +229,14 @@ from
     (select 
             count(distinct wl.user_id) as good_user
         from 
-            weblog wl 
-        join orders od on 
+            bigdata.weblog wl 
+        join bigdata.orders od on 
             wl.user_id=od.user_id
         where 
             wl.product_id=od.product_id and 
             (cast(substring(od.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800)
     ) q1,
-    (select count(distinct user_id) as all_user from weblog) q2
+    (select count(distinct user_id) as all_user from bigdata.weblog) q2
 ```
 15104
 100569
@@ -230,23 +247,96 @@ from
 ## 4、通过sql 计算每个商品的每天的pv，uv 并存入新建hive表，表名字段名，设计格式可以自己定义
 
 ```sql
-select from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd'), product_id, count(req_url), count(distinct user_id)
-from bigdata.weblog
-group by from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd'), product_id;
 
-
-select from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd'), product_id, count(product_id)
-from bigdata.weblog
-group by from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd'), product_id;
-
-
-select product_name, from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd'), count(distinct user_id)
+//按照商品名和日期排序计算每个商品每天的PV
+select product_name, from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd') c1, count(user_id)
 from bigdata.weblog wl join product pc on wl.product_id = pc.product_id 
-group by from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd'), product_name
-order by product_name, time_tag;
+group by product_name, from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd') 
+order by product_name, c1;
 
-select product_name, from_unixtime(cast(substring(time_tag, 1, 10) as bigint) as time_tmp, 'yyyy-MM-dd'), count(distinct user_id)
+//按照商品名和日期排序计算每个商品每天的UV
+select product_name, from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd') c1, count(distinct user_id)
 from bigdata.weblog wl join product pc on wl.product_id = pc.product_id 
-group by time_tmp, product_name
-order by product_name, time_tag;
+group by product_name, from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd')
+order by product_name, c1;
+
+//按照商品名和日期排序计算每个商品每天的PV和UV，并存入新的hive表
+create table if not exists `bigdata.pvuvperproduct` (
+    `product_name`      string      comment     '商品名称',
+    `day`               string      comment     '日期',
+    `pv`                bigint      comment     'pv',
+    `uv`                bigint      comment     'uv'
+);
+
+insert into bigdata.pvuvperproduct 
+select product_name, from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd') day, count(user_id) pv, count(distinct user_id) uv
+from bigdata.weblog wl join bigdata.product pc on wl.product_id = pc.product_id 
+group by product_name, from_unixtime(cast(substring(time_tag, 1, 10) as bigint), 'yyyy-MM-dd') 
+order by product_name, day;
+
+```
+
+## 5. 计算每个商品每天的pv，uv的环比情况（今天-昨天/昨天），并且筛选出环比增长最大和环比增长最小的（负数小于正数）
+
+```sql
+// 每个商品每天的pv，uv环比情况
+select pup2.product_name product_name, pup2.day day, format_number((pup2.pv - pup1.pv)/pup1.pv, 2) rap, format_number((pup2.uv - pup1.uv)/pup1.uv, 2) rau
+from 
+    bigdata.pvuvperproduct pup1 join bigdata.pvuvperproduct pup2
+on
+    pup1.product_name=pup2.product_name
+where 
+    unix_timestamp(pup2.day, 'yyyy-MM-dd') - unix_timestamp(pup1.day, 'yyyy-MM-dd') = 86400
+
+//将每个商品每天的pv，uv环比情况存到一个临时表中
+create table if not exists `bigdata.rapvuvperproduct` (
+    `product_name`      string      comment     '商品名称',
+    `day`               string      comment     '日期',
+    `rap`                float      comment     '商品pv的环比',
+    `rau`                float      comment     '商品uv的环比'
+);
+//插入数据到表中
+insert into bigdata.rapvuvperproduct
+select pup2.product_name product_name, pup2.day day, format_number((pup2.pv - pup1.pv)/pup1.pv, 2) rap, format_number((pup2.uv - pup1.uv)/pup1.uv, 2) rau
+from 
+    bigdata.pvuvperproduct pup1 join bigdata.pvuvperproduct pup2
+on
+    pup1.product_name=pup2.product_name
+where 
+    unix_timestamp(pup2.day, 'yyyy-MM-dd') - unix_timestamp(pup1.day, 'yyyy-MM-dd') = 86400
+
+
+// 找出PV环比增长最大商品及时间
+/*
+select r1.product_name, day, maxrap from bigdata.rapvuvperproduct where rap = (
+select map    from
+    (
+        select product_name, max(rap) maxrap from bigdata.rapvuvperproduct group by product_name
+    ) r1 join bigdata.rapvuvperproduct rapup on r1.product_name=rapup.product_name and r1.maxrap = rapup.rap
+)
+
+select product_name, day, rap from bigdata.rapvuvperproduct where rap IN (
+    select max(maxrap) as maxrap
+    from (select product_name, max(rap) maxrap from bigdata.rapvuvperproduct group by product_name) r1 
+    join bigdata.rapvuvperproduct rapup on r1.product_name=rapup.product_name and r1.maxrap = rapup.rap);
+*/
+select product_name, day, rap from rapvuvperproduct a where a.rap IN (select max(b.rap) from rapvuvperproduct b)
+select product_name, day, rap from rapvuvperproduct a where a.rap IN (select min(b.rap) from rapvuvperproduct b)
+select product_name, day, rau from rapvuvperproduct a where a.rau IN (select max(b.rau) from rapvuvperproduct b)
+select product_name, day, rau from rapvuvperproduct a where a.rau IN (select min(b.rau) from rapvuvperproduct b)
+
+//删除临时表
+drop table bigdata.rapvuvperproduct;
+```
+
+## 6、计算每天的登录用户数中新老用户占比，并且统计新老用户分别的pv uv
+
+```sql
+//先所有登录用户，从weblog中找出当天所有用户数即可，时间可以通过脚本获取
+select count(distinct user_id) from bigdata.weblog where day='2018-05-29';
+
+//再找出新注册用户，从weblog中找出注册时间时当天的用户。
+select count(distinct wl.user_id) from bigdata.weblog wl join member mb on wl.user_id=mb.user_id and from_unixtime(cast(substring(mb.register_time, 1, 10) as bigint), 'yyyy-MM-dd') = '2018-05-29';
+
+//合并起来就是
 ```
