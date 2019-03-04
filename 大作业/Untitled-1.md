@@ -1,3 +1,4 @@
+mysql -u root -pGg/ru,.#5 -h 10.173.32.6 -P3306
 # weblog数据表
 ## 创建数据库
 ```sql
@@ -131,7 +132,7 @@ sqoop import --connect "jdbc:mysql://10.173.32.6:3306/sqoop? characterEncoding=U
 alter table bigdata.orders add partition (day='2018-05-29') location '/user/1015146591/hive/orders/day=2018-05-29';
 ```
 
-mysql -u root -pGg/ru,.#5 -h 10.173.32.6 -P3306
+
 
 
 # 第四步
@@ -144,69 +145,42 @@ PV（page view，页面浏览量）
 
 用户每打开1个网站页面，记录1个PV。用户多次打开同一页面，PV值累计多次。主要用来衡量网站用户访问的网页数量。是评价网站流量最常用的指标之一。
 
-
-```sql
-select count(req_url) from weblog;
-2175228
-```
-
-### UV
-
 UV（ unique visitor，网站独立访客）
 
 通过互联网访问、流量网站的自然人。1天内相同访客多次访问网站，只计算为1个独立访客。该概念的引入，是从用户个体的角度对访问数据进行划分。
 
 ```sql
-select count(distinct user_id) from weblog;
-100569
+select day, count(req_url), count(distinct user_id) from bigdata.weblog group by day;
+2175228
 ```
 
-### 订单量
+### 订单量 
 
 直接计算order_id的个数即可
 
 ```sql
-select count(distinct order_id) from orders;
+select from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd'), count(distinct order_id), sum(pay_amount) from bigdata.orders group by from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd');
 15104
 ```
 
-### 收入
-
-计算pay_amount的总和即可
-
-```sql
-select sum(pay_amount) from orders;
-939095.0
-```
 
 ### 注册用户数
 
 计算member表中user_id的个数就可以了吧
 
 ```sql
-select count(distinct user_id) from member where from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd') = from_unixtime(unix_timestamp(),'yyyy-MM-dd');
+select from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd'), count(distinct user_id) from bigdata.member group by from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd');
 30180
 ```
 
 将所有查询信息放入一个sql中
 
 ```sql
-SELECT r1.pv, r1.uv, r1.order_count, r2.income, r3.register_count
-FROM (
-	SELECT COUNT(req_url) AS pv, COUNT(DISTINCT user_id) AS uv
-		, COUNT(DISTINCT order_id) AS order_count
-	FROM weblog
-	WHERE day = from_unixtime(unix_timestamp(), 'yyyy-MM-dd')
-) r1, (
-		SELECT SUM(pay_amount) AS income
-		FROM orders
-		WHERE from_unixtime(CAST(substring(order_time, 1, 10) AS bigint), 'yyyy-MM-dd') = from_unixtime(unix_timestamp(), 'yyyy-MM-dd')
-	) r2, (
-		SELECT COUNT(user_id) AS register_count
-		FROM member
-		WHERE from_unixtime(CAST(substring(register_time, 1, 10) AS bigint), 'yyyy-MM-dd') = from_unixtime(unix_timestamp(), 'yyyy-MM-dd')
-	) r3
-2175228	100569	15104	939095.0	30180
+select r1.day, pv, uv, orders_count, income, register_count from 
+(select day, count(req_url) pv, count(distinct user_id) uv from bigdata.weblog group by day) r1 join 
+(select from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct order_id) orders_count, sum(pay_amount) income from bigdata.orders group by from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd')) r2 on r1.day = r2.day join 
+(select from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct user_id) register_count from bigdata.member group by from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd')) r3
+on r1.day = r3.day
 ```
 
 创建新表：
@@ -219,6 +193,17 @@ create table if not exists `bigdata.puoir` (
     `income`        double      comment     '收入',
     `regitster_count`   bigint  comment     '注册用户数'
 );
+```
+
+插入表中
+
+```sql
+insert into table bigdata.puoir
+select r1.day, pv, uv, orders_count, income, register_count from 
+(select day, count(req_url) pv, count(distinct user_id) uv from bigdata.weblog group by day) r1 join 
+(select from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct order_id) orders_count, sum(pay_amount) income from bigdata.orders group by from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd')) r2 on r1.day = r2.day join 
+(select from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct user_id) register_count from bigdata.member group by from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd')) r3
+on r1.day = r3.day
 ```
 
 ## 2. 计算访问product页面的用户中，有多少比例在30分钟内下单并且支付成功对应的商品
@@ -333,10 +318,24 @@ drop table bigdata.rapvuvperproduct;
 
 ```sql
 //先所有登录用户，从weblog中找出当天所有用户数即可，时间可以通过脚本获取
-select count(distinct user_id) from bigdata.weblog where day='2018-05-29';
+select day, count(distinct user_id) all_users from bigdata.weblog where day in (select distinct day from bigdata.weblog) group by day;
 
-//再找出新注册用户，从weblog中找出注册时间时当天的用户。
-select count(distinct wl.user_id) from bigdata.weblog wl join member mb on wl.user_id=mb.user_id and from_unixtime(cast(substring(mb.register_time, 1, 10) as bigint), 'yyyy-MM-dd') = '2018-05-29';
+//再找出新注册用户，从weblog中找出注册时间是当天的用户。
+select wl.day, count(distinct wl.user_id) from bigdata.weblog wl join bigdata.member mb on wl.user_id=mb.user_id and wl.day = from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd') group by wl.day;
 
-//合并起来就是
+select r1.day, all_users, new_users, format_number(new_users/all_users, 2), 1 - format_number(new_users/all_users, 2) from 
+(select day, count(distinct user_id) all_users from bigdata.weblog where day in (select distinct day from bigdata.weblog) group by day) r1 left join 
+(select wl.day, count(distinct wl.user_id) new_users from bigdata.weblog wl join bigdata.member mb on wl.user_id=mb.user_id and wl.day = from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd') group by wl.day) r2 
+on r1.day=r2.day;
+
+//统计新用户的PV和UV
+select wl.day, count(wl.req_url) as pv, count(distinct wl.user_id) as uv from bigdata.weblog wl join bigdata.member mb on wl.user_id = mb.user_id and wl.day = from_unixtime(cast(substring(mb.register_time, 1, 10) as bigint), 'yyyy-MM-dd') group by wl.day;
+
+//计算每天老用户的pv和uv
+select wl.day, count(wl.req_url) as pv, count(distinct wl.user_id) as uv from bigdata.weblog wl join
+(select day, user_id, register_time from bigdata.member) r1
+on wl.user_id = r1.user_id
+where cast(substring(r1.register_time, 1, 10) as bigint) < cast(substring(wl.time_tag, 1, 10) as bigint)
+group by wl.day;
+
 ```
