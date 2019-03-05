@@ -2,7 +2,6 @@
 # https://blog.csdn.net/xianjie0318/article/details/82142248
 HIVE_DB=bigdata
 
-#jdbc:mysql://${DB1IP}:${DB1PORT}/${DATABASW}?useUnicode=true&characterEncoding=utf-8&tinyInt1isBit=false
 DB1IP='jdbc:mysql://10.173.32.6:3306/sqoop? characterEncoding=UTF-8&useCursorFetch=true'
 echo $DB1IP
 #username
@@ -11,12 +10,9 @@ echo $DB1NAME
 #password
 DB1PASS=Gg/ru,.\#5
 echo $DB1PASS
-#mysql table name
-tablename='member'
-echo $tablename
+
  
 today=`date +"%Y-%m-%d" -d  "-0 days"`
-yesterday=`date +"%Y-%m-%d" -d  "-1 days"`
 
 create_bigdata_product="
 CREATE EXTERNAL TABLE IF NOT EXISTS `${HIVE_DB}.product` (
@@ -75,12 +71,13 @@ alter_bigdata_orders="
 alter table ${HIVE_DB}.orders add partition (day='${today}') location '/user/1015146591/hive/orders/day=${today}';
 "
 
+cd /mnt/home/1015146591/workspace/homework_hive
 # sqoop mysql--->/user/1015146591/hive/product/${today}
 sqoop import --connect $DB1IP \
     --username $DB1NAME \
     --password $DB1PASS \
     --table product \
-    --target-dir "/user/1015146591/hive/product/day=${today}"v\
+    --target-dir "/user/1015146591/hive/product/day=${today}" \
     --delete-target-dir
 
 isok=$?

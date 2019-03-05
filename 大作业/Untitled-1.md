@@ -207,7 +207,20 @@ on r1.day = r3.day
 ```
 
 ## 2. 计算访问product页面的用户中，有多少比例在30分钟内下单并且支付成功对应的商品
+
+
 ```sql
+//找出所有访问product页面的用户数
+select count(distinct user_id) from bigdata.weblog where req_url like '%/product%';
+
+//找出有多少访问product页面的用户在20分钟内下单并成功支付
+select count(distinct wl.user_id) 
+from bigdata.weblog wl 
+    join bigdata.orders ord on wl.user_id=ord.user_id 
+where wl.req_url like '%/product%' 
+    and cast(substring(ord.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800;
+
+//待完成。。。。。。。。。。
 select 
     format_number(q1.good_user / q2.all_user, 2)
 from 
@@ -219,15 +232,73 @@ from
             wl.user_id=od.user_id
         where 
             wl.product_id=od.product_id and 
-            (cast(substring(od.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800)
+            wl.active_name = 'pay' and 
+            (cast(substring(wl.time_tag, 1, 10) as bigint) - cast(substring(od.order_time, 1, 10) as bigint) < 1800)
     ) q1,
     (select count(distinct user_id) as all_user from bigdata.weblog) q2
 ```
-15104
+12215
 100569
 0.15
 
 ## 3、更改第二个sql，需要做到 支持变更不同的页面类型（正则）和目标事件，支持指定时间间隔的转化率分析（需要写明设计思路）
+
+//使用正则找出所有页面类型
+```sql
+select distinct
+    case regexp_extract(req_url, '.*?.com(.*?)$', 1) 
+    when '' then  regexp_extract(req_url, '.*?//(.*?)$', 1)
+    else 
+        case regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        when '' then regexp_extract(req_url, '.*?.com/(.*?)$', 1)
+        else regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        end
+    end 
+from bigdata.weblog;
+```
+
+//找出访问每种页面类型的用户中有多少比例的用户是在浏览页面30分钟内下单并成功支付的
+```sql
+select 
+    case regexp_extract(req_url, '.*?.com(.*?)$', 1) 
+    when '' then  regexp_extract(req_url, '.*?//(.*?)$', 1)
+    else 
+        case regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        when '' then regexp_extract(req_url, '.*?.com/(.*?)$', 1)
+        else regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        end
+    end as page_type,
+
+```
+
+```sql
+
+
+//计算不同事件类型下每个类型有多少个用户访问
+select active_name, count(distinct user_id) as all_users from bigdata.weblog group by active_name;
+
+
+select r1.active_name, all_users, good_users from
+(select active_name, count(distinct user_id) as all_users from bigdata.weblog group by active_name) r1 join 
+(select active_name, count(distinct wl.user_id) as good_users from bigdata.weblog wl join bigdata.orders ord on wl.user_id=ord.user_id and wl.product_id=ord.product_id where (cast(substring(ord.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800) group by active_name) r2 
+on r1.active_name=r2.active_name;
+
+select 
+            count(distinct wl.user_id) as good_user
+        from 
+            bigdata.weblog wl 
+        join bigdata.orders od on 
+            wl.user_id=od.user_id
+        where 
+            wl.product_id=od.product_id and 
+            wl.active_name = 'pay' and 
+            (cast(substring(od.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800)
+```
+
+//计算每种类型中访问用户最终在30分钟内下单并成功支付的个数
+```sql
+
+```
 
 ## 4、通过sql 计算每个商品的每天的pv，uv 并存入新建hive表，表名字段名，设计格式可以自己定义
 
