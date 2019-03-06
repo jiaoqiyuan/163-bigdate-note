@@ -64,6 +64,8 @@ tar xzvf sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C ~/apps
 
     复制Hive的配置文件hive-site.xml到sqoop的conf目录下，否则可能会报 Hive 数据库没有建立的错误。
 
+    复制hive下的lib/hive-exec-1.2.2.jar到sqoop的lib目录中，这样在导入hive时才不会报错。
+
 3. 连接数据库：
 
     ```
