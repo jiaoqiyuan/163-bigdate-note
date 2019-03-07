@@ -410,3 +410,13 @@ where cast(substring(r1.register_time, 1, 10) as bigint) < cast(substring(wl.tim
 group by wl.day;
 
 ```
+
+## 7. 设计udaf
+
+```sql
+select collect_list(wl2.active_name, wl2.time_tag) from bigdata.weblog wl1 join bigdata.weblog wl2 on wl1.user_id = wl2.user_id where cast(substring(wl1.time_tag, 1, 10) as bigint) - cast(substring(wl2.time_tag, 1, 10) as bigint) < 1800;
+
+select wl2.user_id, collect_list(wl2.active_name, wl2.time_tag) from bigdata.weblog wl1 join bigdata.weblog wl2 on wl1.user_id = wl2.user_id where (cast(substring(wl1.time_tag, 1, 10) as bigint) - cast(substring(wl2.time_tag, 1, 10) as bigint) < 1800) and (cast(substring(wl1.time_tag, 1, 10) as bigint) > cast(substring(wl2.time_tag, 1, 10) as bigint)) group by wl2.user_id;
+
+select wl2.user_id, wl2.active_name, wl2.time_tag from bigdata.weblog wl1 join bigdata.weblog wl2 on wl1.user_id = wl2.user_id where cast(substring(wl1.time_tag, 1, 10) as bigint) - cast(substring(wl2.time_tag, 1, 10) as bigint) < 1800
+```
