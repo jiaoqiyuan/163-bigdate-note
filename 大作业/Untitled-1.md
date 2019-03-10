@@ -213,14 +213,25 @@ on r1.day = r3.day
 //找出所有访问product页面的用户数
 select count(distinct user_id) from bigdata.weblog where req_url like '%/product%';
 
-//找出有多少访问product页面的用户在20分钟内下单并成功支付
+//找出有多少访问product页面的用户在30分钟内下单并成功支付
 select count(distinct wl.user_id) 
 from bigdata.weblog wl 
-    join bigdata.orders ord on wl.user_id=ord.user_id 
+    join bigdata.orders ord on wl.user_id=ord.user_id and ord.pay_amount != 0
 where wl.req_url like '%/product%' 
     and cast(substring(ord.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800;
 
-//待完成。。。。。。。。。。
+//完成。。。。。。。。。。
+select 
+    q1.good_user, q2.all_user, format_number(q1.good_user / q2.all_user, 2)
+from 
+    (select count(distinct wl.user_id) as good_user
+    from bigdata.weblog wl 
+        join bigdata.orders ord on wl.user_id=ord.user_id and ord.pay_amount != 0
+    where wl.req_url like '%/product%' 
+        and cast(substring(ord.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800
+    ) q1,
+    (select count(distinct user_id) as all_user from bigdata.weblog where req_url like '%/product%') q2
+
 select 
     format_number(q1.good_user / q2.all_user, 2)
 from 
@@ -230,14 +241,14 @@ from
             bigdata.weblog wl 
         join bigdata.orders od on 
             wl.user_id=od.user_id
-        where 
-            wl.product_id=od.product_id and 
-            wl.active_name = 'pay' and 
+        where wl.active_name = 'pay' and 
             (cast(substring(wl.time_tag, 1, 10) as bigint) - cast(substring(od.order_time, 1, 10) as bigint) < 1800)
     ) q1,
-    (select count(distinct user_id) as all_user from bigdata.weblog) q2
+    (select count(distinct user_id) as all_user from bigdata.weblog where req_url like '%/product%') q2
+
 ```
 12215
+15104
 100569
 0.15
 
@@ -278,10 +289,51 @@ select
 select active_name, count(distinct user_id) as all_users from bigdata.weblog group by active_name;
 
 
-select r1.active_name, all_users, good_users from
+select r1.active_name, all_users, good_users, format_number(r2.good_users / r1.all_users, 2) from
 (select active_name, count(distinct user_id) as all_users from bigdata.weblog group by active_name) r1 join 
-(select active_name, count(distinct wl.user_id) as good_users from bigdata.weblog wl join bigdata.orders ord on wl.user_id=ord.user_id and wl.product_id=ord.product_id where (cast(substring(ord.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800) group by active_name) r2 
-on r1.active_name=r2.active_name;
+(select active_name, count(distinct wl.user_id) as good_users from bigdata.weblog wl join bigdata.orders ord on wl.user_id=ord.user_id where (cast(substring(ord.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800) group by active_name) r2 
+on r1.active_name=r2.active_name
+and r1.active_name = 'order';
+
+select r1.page_type, all_users, good_users, format_number(good_users / all_users, 2) from
+(select case regexp_extract(req_url, '.*?.com(.*?)$', 1) 
+    when '' then  regexp_extract(req_url, '.*?//(.*?)$', 1)
+    else 
+        case regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        when '' then regexp_extract(req_url, '.*?.com/(.*?)$', 1)
+        else regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        end
+    end as page_type, 
+    count(distinct user_id) as all_users from bigdata.weblog 
+    group by 
+    (case regexp_extract(req_url, '.*?.com(.*?)$', 1) 
+    when '' then  regexp_extract(req_url, '.*?//(.*?)$', 1)
+    else 
+        case regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        when '' then regexp_extract(req_url, '.*?.com/(.*?)$', 1)
+        else regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        end
+    end)) r1 join 
+    (select case regexp_extract(req_url, '.*?.com(.*?)$', 1) 
+    when '' then  regexp_extract(req_url, '.*?//(.*?)$', 1)
+    else 
+        case regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        when '' then regexp_extract(req_url, '.*?.com/(.*?)$', 1)
+        else regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        end
+    end as page_type, 
+    count(distinct wl.user_id) as good_users from bigdata.weblog wl join bigdata.orders ord on wl.user_id=ord.user_id where (cast(substring(ord.order_time, 1, 10) as bigint) - cast(substring(wl.time_tag, 1, 10) as bigint) < 1800) 
+    group by 
+    (case regexp_extract(req_url, '.*?.com(.*?)$', 1) 
+    when '' then  regexp_extract(req_url, '.*?//(.*?)$', 1)
+    else 
+        case regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        when '' then regexp_extract(req_url, '.*?.com/(.*?)$', 1)
+        else regexp_extract(req_url, '.*?.com/(.*?)/.*?', 1)
+        end
+    end)) r2 
+on r1.page_type=r2.page_type
+and r1.page_type = 'product';
 
 select 
             count(distinct wl.user_id) as good_user
