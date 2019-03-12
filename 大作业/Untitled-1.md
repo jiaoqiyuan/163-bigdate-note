@@ -151,6 +151,7 @@ UV（ unique visitor，网站独立访客）
 
 ```sql
 select day, count(req_url), count(distinct user_id) from bigdata.weblog group by day;
+select day, count(active_name), count(distinct user_id) from bigdata.weblog where active_name = 'pageview' group by day;
 2175228
 ```
 
@@ -177,10 +178,11 @@ select from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-d
 
 ```sql
 select r1.day, pv, uv, orders_count, income, register_count from 
-(select day, count(req_url) pv, count(distinct user_id) uv from bigdata.weblog group by day) r1 join 
-(select from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct order_id) orders_count, sum(pay_amount) income from bigdata.orders group by from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd')) r2 on r1.day = r2.day join 
+(select day, count(req_url) pv, count(distinct user_id) uv from bigdata.weblog group by day) r1 left join 
+(select from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct order_id) orders_count, sum(pay_amount) income from bigdata.orders group by from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd')) r2 on r1.day = r2.day left join 
 (select from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct user_id) register_count from bigdata.member group by from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd')) r3
 on r1.day = r3.day
+order by r1.day
 ```
 
 创建新表：
@@ -200,10 +202,11 @@ create table if not exists `bigdata.puoir` (
 ```sql
 insert into table bigdata.puoir
 select r1.day, pv, uv, orders_count, income, register_count from 
-(select day, count(req_url) pv, count(distinct user_id) uv from bigdata.weblog group by day) r1 join 
-(select from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct order_id) orders_count, sum(pay_amount) income from bigdata.orders group by from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd')) r2 on r1.day = r2.day join 
+(select day, count(req_url) pv, count(distinct user_id) uv from bigdata.weblog group by day) r1 left join 
+(select from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct order_id) orders_count, sum(pay_amount) income from bigdata.orders group by from_unixtime(cast(substring(order_time, 1, 10) as bigint), 'yyyy-MM-dd')) r2 on r1.day = r2.day left join 
 (select from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd') day, count(distinct user_id) register_count from bigdata.member group by from_unixtime(cast(substring(register_time, 1, 10) as bigint), 'yyyy-MM-dd')) r3
 on r1.day = r3.day
+order by r1.day
 ```
 
 ## 2. 计算访问product页面的用户中，有多少比例在30分钟内下单并且支付成功对应的商品
@@ -471,9 +474,4 @@ select collect_list(wl2.active_name, wl2.time_tag) from bigdata.weblog wl1 join 
 select wl2.user_id, collect_list(wl2.active_name, wl2.time_tag) from bigdata.weblog wl1 join bigdata.weblog wl2 on wl1.user_id = wl2.user_id where (cast(substring(wl1.time_tag, 1, 10) as bigint) - cast(substring(wl2.time_tag, 1, 10) as bigint) < 1800) and (cast(substring(wl1.time_tag, 1, 10) as bigint) > cast(substring(wl2.time_tag, 1, 10) as bigint)) group by wl2.user_id;
 
 select wl2.user_id, wl2.active_name, wl2.time_tag from bigdata.weblog wl1 join bigdata.weblog wl2 on wl1.user_id = wl2.user_id where cast(substring(wl1.time_tag, 1, 10) as bigint) - cast(substring(wl2.time_tag, 1, 10) as bigint) < 1800
-```
-
-```
-add jar /mnt/home/1015146591/jars/etl-1.0-jar-with-dependencies.jar;
-create temporary function collect_actions as 'com.bigdata.etl.udaf.UDAFCollectAction1';
 ```
