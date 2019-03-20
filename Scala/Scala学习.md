@@ -554,5 +554,85 @@ object Accounts {
 
 object对象不提供构造器参数。
 
+### 单例对象使用场景
+
+- 作为存放工具函数或常量的地方，与Java中静态变量和静态常量一致。
+
+- 高效地共享单个不可变实例
+
+- 需要用单个实例来协调某个服务时(参考单例模式)
+
+### 伴生对象
+
+如果一个单例对象和它的同名类一起出现时，这时的单例对象被称为这个同名类的“伴生对象”，相应的类被称为这个单例对象的“伴生类”。
+
+类和它的伴生对象必须存放在同一个文件中，可以相互访问私有成员。
+
+没有同名类的单例对象被称为孤立对象，一般情况下Scala程序的入口点main方法就是定义在一个孤立对象里。
+
+```scala
+//类的伴生对象可以被访问，但是并不在类的作用域中
+class Account {
+    val id = Account.newUniqueNumber()
+    private var balance = 0.0
+    def deposit(amount: Double) {
+        balance += amount
+    }
+    ...
+}
+
+object Account {
+    private var lastNumber = 0
+    private def newUniqueNumber() = {
+        lastNumber += 1
+        lastNumber
+    }
+}
+```
+
+## apply方法
+
+apply方法调用约定：
+
+> 用括号传递给实例或单例对象名一个或多个参数时，Scala会在相应的类或对象中查找方法名为apply且参数列表与传入的参数一致的方法，并用传入的参数来调用该apply方法。
+
+实例化单例对象时，并没有使用到new，这是怎么做到的呢？这就是apply的作用。
+
+```scala
+//通常一个apply方法返回的是半生类的对象
+class Account private (val id: Int, initialBalance: Double) {
+    private var balance = initialBalance
+    ...
+}
+
+object Account{
+    def apply(initialBanance: Double) = new Account(newUniqueNumber(), initialBalance)
+    ...
+}
+```
+
+### Array(100)和 new Array(100)有什么不同
+
+|  | Array(100) | new Array(100) |
+|:---:|:-----------:|:-------------:|
+| 调用方法 | apply(100) | this(100) |
+| 输出结果 | 输出只有一个元素100的数组 | 输出包含100个null元素的数组 |
+
+### 为什么设计apply方法
+
+- 保持对象和函数之间使用的一致性
+
+- 面向对象：对象.方法   数学：函数(参数)
+
+- Scala中一切都是对象，包括函数也是对象。Scala中的函数既保留括号调用样式，也可以使用点号调用形式，其对应的方法名即为apply。
+
+unapply方法
+
+- unapply方法用于对对象进行解构操作，与apply方法类似，该方法也会被自动调用。
+
+- 可以认为unapply方法是apply方法的反向操作，apply方法接受构造参数变成对象，而unapply方法接受一个对象从中取值。
+
+
+## 方法重写和字段重写
 
 [1]: https://blog.csdn.net/j754379117/article/details/41966337
