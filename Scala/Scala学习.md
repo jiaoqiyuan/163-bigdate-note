@@ -350,7 +350,7 @@ scala> for(i <- 1 to 3) {
 13 22 23 31 32 33
 ```
 
-### 退出训话
+### 退出循环
 
 Scala中没有提供break和continue语句来退出训话，一般情况下有三种方法退出循环：
 
@@ -592,6 +592,8 @@ object Account {
 
 ## apply方法
 
+关于scala apply方法的讲解可以参考这个：[Scala学习笔记--apply 方法详解][2].
+
 apply方法调用约定：
 
 > 用括号传递给实例或单例对象名一个或多个参数时，Scala会在相应的类或对象中查找方法名为apply且参数列表与传入的参数一致的方法，并用传入的参数来调用该apply方法。
@@ -635,4 +637,196 @@ unapply方法
 
 ## 方法重写和字段重写
 
+### 方法重写
+
+Scala中重写一个非抽象方法必须使用override修饰符：
+
+```scala
+public class Person {
+    ...
+    override def toString = getClass.getName + "[name=" + name + "]"
+}
+```
+
+继承抽象类和特质类时重写方法可以不写override修饰符，钻石结构中重写方法时需要写override修饰符，[参考链接][3]。
+
+override修饰符可以再多种情况下给出错误提示：
+
+- 拼错重写的方法名
+
+- 在新方法中使用了错误的参数类型
+
+- 在超类中引入了新的方法，但是这个新的方法与子类方法相抵触。
+
+### 字段重写
+
+Scala的字段由一个私有字段和取值器/改值器方法构成
+
+```scala
+class Person(val name: String) {
+    override def toString = getClass.getName + "[name=" + name + "]"
+}
+
+class SecretAgent(codename: String) extends Person(codename) {
+    override val name = "secret"    //不想暴露真名
+    override val toString = "secret"    //或类名
+}
+```
+
+重写限制：
+
+|  | 用val | 用def | 用var |
+|:---:|:---:|:---:| :---: |
+| 重写val | 子类有一个私有字段（与超类的字段名字相同）getter方法重写超类的getter方法 | 错误 | 错误 |
+| 重写def | 子类有一个私有字段 getter方法重写超类的方法 | 和java一样 | var可以重写getter/setter对。只重写getter会报错 |
+| 重写var | 错误 | 错误 | 仅当超类的var是抽象的才可以 |
+
+
+## 抽象类
+
+### 抽象方法
+
+如果一个类包含没有实现的成员，则必须使用abstract关键字进行修饰，定义为抽象类，该类不能实例化，必须由其子类继承该抽象类后实现相应的成员，才能实例化继承类。
+
+```scala
+abstract class Person(val name: String) {
+    def id: Int     //没有方法体，这是一个抽象方法
+}
+```
+
+- 抽象类中，不需要对抽象方法使用abstract关键字，scala会自动判断，只需要省去方法体即可。
+
+- 某类至少存在一个抽象方法，则该类必须声明称抽象类
+
+- 子类中重写超类的抽象方法时，不需要加override关键字
+
+### 抽象字段
+
+抽象字段就是一个没有初始值的字段
+
+```scala
+abstract class Person {
+    val id: Int     //没有初始化，这是一个带有抽象的getter方法的抽象字段。
+    val name: String      //另一个抽象字段，带有抽象的getter和setter方法。
+}
+```
+
+- 抽象字段必须声明类型
+
+- 子类重写抽象字段时不需要写override关键字。
+
+## trait特质
+
+Java中是不允许多重继承的，Scala也不允许，多重继承如下所示：
+
+```
+          Person
+     -------|--------
+    |                |
+Student          Employee
+    |                |
+     -------|--------
+    Teaching Assistant
+```
+
+TA(Teaching Assistant)无法同时继承Student和Employee，但是Scala中引入了一个叫做特质(trait)的东西来实现多重继承。
+
+特质用于在类之间共享程序接口和字段，类似于Java的接口。
+
+类和对象可以扩展特质，但是特质不能被实例化，因此特质没有参数。
+
+```scala
+trait Logger {
+    def log(msg: String)       //这个是抽象方法
+}
+```
+
+Java中一个类是可以实现多个接口的，在Scala中一个类可以实现多个特质，特质跟Java的接口作用一摸一样。
+
+### 当作接口使用的特质
+
+- 特质中未被实现的方法默认为抽象方法。
+
+- 重写特质的抽象方法不需要加override关键字。
+
+- 使用特质时用extends关键字。
+
+- 需要多个特质时，用with关键字来添加额外的特质。
+
+- Scala类中只能有一个超类，但是可以有任意数量的特质。
+
+特质与Java中接口的不同是，特质中的方法不需要一定是抽象的，也可以有具体实现，但是让特质拥有具体行为存在一个弊端，那就是当特质改变时，所有混入了该特质的类都需要重新编译。
+
+```scala
+trait ConsoleLogger {
+    def log(msg: String) {
+        println(msg)
+    }
+}
+```
+
+### 继承类的特质
+
+特质也可以继承类，特质继承类时，这个类会自动成为所有混入该特质的超类。
+
+如果特质继承的类扩展了另一个类，那么只有另一类是特质的超类的一个子类才可以混入该特质。
+
+LoggedException是一个特质，它继承了Logged和Exception这两个类
+
+```scala
+class UnhappyException extends IOException with LoggedException
+
+class UnhappyFrame extends JFrame with LoggedException  //错误
+```
+
+### 带有特质的对象
+
+- 在构造单个对象时，可以为其添加特质。
+
+- 特质可以将对象原本没有的方法与字段加入对象中。
+
+- 如果特质和对象改写了同一个超类的方法，则排在右边的先被执行。
+
+
+
+```scala
+trait Logged {
+    def log(msg: String) { }
+}
+
+class SavingsAccount extends Account with Logged {
+    def withdeaw(amount: Double) {
+        if(amount > balance) log("Insufficient funds")
+        else
+        ...
+    }
+}
+```
+
+### 特质中的字段
+
+- 特质中的字体可以是具体的也可以是抽象的，如果有初始值那么字段就是具体的。
+
+- 通常对于特质中每一个具体字段，使用该字段的类都会获得一个字段与之对应，这些字段不是被继承的，他们只是简单地加到了子类中。
+
+- 特质中未被初始化的字段在具体的子类中必须被重写。
+
+### 自身类型与结构类型(不理解)
+
+- 带有自身类型的特质只能被混入指定类型的子类
+
+- 结构类型只给出类必须拥有的方法而不是类的名称。
+
+```scala
+trait LoggedException extends Logged {
+    this: Exception => def log() {
+        log(getMessage())
+    }
+}
+```
+
+特质即实现了Java的接口功能，又实现了抽象类的功能，在Scala中还是比较常见的。
+
 [1]: https://blog.csdn.net/j754379117/article/details/41966337
+[2]: https://blog.csdn.net/shenlei19911210/article/details/78538255
+[3]: https://www.cnblogs.com/yjf512/p/8026611.html
