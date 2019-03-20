@@ -1,6 +1,8 @@
 > 学习环境为Linux，Windows和Mac环境暂时不考虑，以下内容均以Linux为基础。一下记录的是一些学习笔记，可能不太完整，建议参考其他Scala完整教程进行学习。
 
-# Scala安装
+# Scala入门
+
+## Scala安装
 
 学习Scala需要Java环境，所以需要先安装JDK，关于JDK的安装，这里不再说明，直接下载并设置环境变量即可。
 
@@ -14,7 +16,7 @@
 
 python是解释型语言，程序是边解释边运行的，但是Scala是编译性语言，是要先编译再执行的，命令模式下也是快速进行编译后执行的，这是与python本质不同的地方。
 
-## Scala命令行模式初体验
+### Scala命令行模式初体验
 
 下载了个scala安装包，然后添加环境变量后启动：
 
@@ -31,11 +33,526 @@ Scala解释器读取一个表达式进行求值，然后打印出结果，再继
 
 其实说Scala是解释器并不准确，因为它不像Python那样是解释型语言，它接受的表达式都是要编译成字节码然后交给Java虚拟机运行的，所以大部分Scala程序员更倾向于称它为REPL。
 
-# Scala常用类型
+## Scala常用类型
 
-![](http://latex.codecogs.com/gif.latex?\\frac{1}{1+sin(x)})
+<!-- ![](http://latex.codecogs.com/gif.latex?\\frac{1}{1+sin(x)}) -->
 
 
 | type | range |
 |:----:|:-----:|
-| Byte | 8bit($-2^7$) |
+| Byte | 8bit |
+| Short | 16bit |
+| Int | 32 |
+| Long | 64 |
+| Char | 16 |
+| String | 字符序列 |
+| Float | 32位IEEE754单精度浮点数 |
+| Double | 64位IEEE754单精度浮点数 |
+| Boolean | true or false |
+| Unit | 无值 |
+| Null | null或空引用 |
+| Nothing | Nothing类型在Scala的类层级的最低端；它是任何其他类型的子类型 |
+| Any | 所有其他类的超类 |
+| AnyRef | 所有引用类的基类 |
+
+Unit和其他语言中void等同，用作不返回任何结果的方法的结果类型，Unit只有一个实例值，写成()。
+
+与Java不同的是这些类型都是类，没有Java中的基本类型，在Scala中可以直接对这些基础类型调用方法。Scala并不刻意区分基本类型和引用类型。
+
+也就是说在使用Scala编程的过程中不需要关注Java中的基本类型，只需要关注Scala中的类型即可，这些类型是封装好的，可以直接调用类型中的方法进行操作，Scala中不需要包装类型，Java中的Inboxing和Unboxing是在Scala中的编译器中完成的。举例来说，在Scala中创建了一个Int数组，最终在Scala解释器中就会转换成一个int\[\]数组，最终在JVM虚拟机中执行就是int\[\]数组。
+
+### Scala中字符串相关操作
+
+Scala中使用java.lang.String类来表示字符串。
+
+Scala扩展了Scala的String的操作，通过StringOps类给字符串追加了上百种操作。
+
+Scala将String对象**隐式地转换成**StringOps对象，接着StringOps的方法可以被调用。
+
+### Scala中数值类型的相关操作
+
+Scala提供了RichInt，RichDouble，RichChar等操作类。
+
+Scala有BigInt和BigDecimal类，用于任意大小的数字，可以用常规的数学操作符来操作他们。
+
+Scala中不使用强制转换，而是使用方法进行类型的转换。
+
+## 值和变量声明
+
+使用val声明常量，使用var声明变量。
+
+```java
+val answer = 0
+answer = 1  //错误，answer是常量，不允许修改
+
+var result = 0
+result = 1  //正确，result是变量，可以更改
+```
+
+声明变量是必须初始化，也就是赋值一个初始值。Scala可以根据初始值自动推断变量类型，这与python类似，但是Scala会在编译阶段检查类型，而Python只有在运行时才会。
+
+声明多个变量：
+
+```java
+scala> val min, max =100
+min: Int = 100
+max: Int = 100
+
+scala> var greeting, message : String = null
+greeting: String = null
+message: String = null
+```
+
+这样将多个变量声明在一行一般不利于阅读，通常情况下还是每行初始化一个值：
+
+```
+scala> val min = 10
+min: Int = 10
+
+scala> val max = 100
+max: Int = 100
+
+scala> var greeting : String = null
+greeting: String = null
+
+scala> var message : String = null
+message: String = null
+```
+
+## Scala函数与方法
+
+方法定义：
+
+```
+def 方法名(参数列表):方法返回值类型 = {方法体}
+```
+
+其中方法体中可以没有return，方法体最后一行的值就是方法的返回值。如果想在方法体中间返回，就必须使用return。
+
+不带参数的方法调用一般省略圆括号，比如：
+
+```
+scala> "hello".distinct
+res0: String = helo
+```
+
+Scala中没有静态方法，而是使用单例对象和伴生对象实现静态方法和实例方法，这里单例对象是指以object为关键字定义的类，而伴生对象是单例对象在与class对象共存在一个文件中并共享类名的特殊称谓，伴生对象中的就是静态方法，实例对象中的就是实例方法：
+
+```java
+class Account {
+    //实例方法
+}
+
+object Account {
+    //静态方法
+}
+```
+
+函数跟方法不同，函数的定义如下：
+
+```
+val 函数名=(参数列表) => {函数体}
+```
+
+这里需要说明的是递归函数必须指明函数返回值类型。
+
+方法可以转化成函数，但是函数不能转换成方法：
+
+```java
+val 函数名 = 方法名_
+```
+
+在需要函数的地方提供一个方法，会自动转换成函数。
+
+方法与函数的区别：
+
+| 函数 | 方法 |
+|:----:|:-----:|
+| 可以作为单独表达式单独存在 | 只有参数为空的方法可以单独存在 |
+| 必须有参数列表 | 可以没有参数列表 |
+| 函数名代表函数对象本身 | 方法名大表方法调用 |
+| 函数不可转换成方法 | 方法可以转换成函数 |
+
+## 默认参数、带名参数及边长参数
+
+方法定义时如果指定默认参数值，调用时可以不传递该参数：
+
+```scala
+scala> def decorate(str:String, left:String = "[", right:String = "]") = left + str + right
+decorate: (str: String, left: String, right: String)String
+
+scala> decorate("Hello")
+res1: String = [Hello]
+
+scala> decorate("Hello", "<<<", ">>>")
+res2: String = <<<Hello>>>
+```
+
+传递参数时也可以指定参数名，这种情况下就不需要与参数列表的顺序一致，比如：
+
+```scala
+scala> decorate(left="<<<", right=">>>", str="Hello")
+res3: String = <<<Hello>>>
+```
+
+未命名的参数一定要放在带名字的参数之前：
+
+```scala
+scala> decorate("Hello", left="<<<")
+res4: String = <<<Hello]
+```
+
+定义方法时允许指定最后一个参数可以重复（也就是边长参数）：
+
+```scala
+scala> def sum(args : Int*) = {
+     | var result = 0
+     | for (arg <- args) result += arg
+     | result
+     | }
+sum: (args: Int*)Int
+
+scala> val s  = sum(1, 3, 4, 7, 4)
+s: Int = 19
+```
+
+## Scala条件表达式
+
+跟Java条件表达式相同，比较特别的地方是Scala中可以将条件表达式的值赋值给变量：
+
+```scala
+if (x > 0) s = 1 else s = -1
+or
+val s = if (x > 0) 1 else -1
+```
+
+可以理解为Scala中的if/else将Java中的if/else与条件表达式?:结合在了一起。
+
+如果if和else分支返回的结果类型一致，则表达式的类型就是分支类型；如果if和else分支类型不一致，则表达式类型就是两个分支类型的公共超类型。
+
+```scala
+scala> val y = if(x > 0) "positive" else -1
+y: Any = positive
+```
+
+如果条件表达式只有if没有else，那么else返回的就是空，也就是说每种表达式都要有返回值，即使不写出来，也会返回空，如：
+
+```scala
+if(x > 0) 1
+等同于
+if(x > 0) 1 else ()
+```
+
+## Scala循环表达式
+
+分while、do...wihle、for三种，与Java一样。其中Scala的for循环与Java有较大区别：
+
+```
+for(i <- range)
+range可以使一个数字区间表示，如 i to j，或者 i until j
+```
+
+具体使用：
+
+```scala
+scala> var sum = 0
+sum: Int = 0
+
+scala> for(i <- 1 to 10)
+     | sum += i
+
+scala> sum
+res6: Int = 55
+```
+
+### 嵌套循环
+
+Scala的for循环比Java灵活很多，比如使用Scala实现一个嵌套循环：
+
+```scala
+scala> for(i <- 1 to 3; j <- 1 to 3) {
+     | println("i = " + i + " j = " + j)
+     | }
+i = 1 j = 1
+i = 1 j = 2
+i = 1 j = 3
+i = 2 j = 1
+i = 2 j = 2
+i = 2 j = 3
+i = 3 j = 1
+i = 3 j = 2
+i = 3 j = 3
+```
+
+等价于：
+
+```scala
+scala> for(i <- 1 to 3) {
+     | for(j <- 1 to 3) {
+     | println("i = " + i + " j = " + j)
+     | }
+     | }
+i = 1 j = 1
+i = 1 j = 2
+i = 1 j = 3
+i = 2 j = 1
+i = 2 j = 2
+i = 2 j = 3
+i = 3 j = 1
+i = 3 j = 2
+i = 3 j = 3
+```
+
+### 循环守卫
+
+另外在for循环中可以通过条件判断将不想要的数据排除掉：
+
+```scala
+scala> for(i <- 1 to 3 if i != 2) {
+     | println(i + " ")
+     | }
+1 
+3 
+```
+
+等价于：
+
+```scala
+scala> for(i <- 1 to 3) {
+     | if(i != 2) {
+     | println(i + " ")
+     | }
+     | }
+1 
+3 
+```
+
+### 引入变量
+
+Scala在for循环中还可以引入变量：
+
+```scala
+scala> for (i <- 1 to 3; from = 4 - i; j <- from to 3) {
+     | print((10 * i + j) + " ")
+     | }
+13 22 23 31 32 33 
+```
+
+等同于：
+
+```scala
+scala> for(i <- 1 to 3) {
+     | val from = 4 - i;
+     | for(j <- from to 3) {
+     | print((10 * i + j) + " ")
+     | }
+     | }
+13 22 23 31 32 33
+```
+
+### 退出训话
+
+Scala中没有提供break和continue语句来退出训话，一般情况下有三种方法退出循环：
+
+1. 使用Boolean型的控制变量
+
+2. 使用嵌套函数，可以从函数中return。
+   
+3. 使用Breaks对象中的break方法，这种方法不常用也不推荐使用。
+
+## 异常处理
+
+> 异常是在程序执行期间发生的事件，它会中断正在执行的程序的正常指令流。为了能及时有效处理程序中的运行错误，必须使用异常类。
+
+Scala通过抛出异常方法的方式来终止相关代码的运行，不必通过返回值。
+
+### 异常处理流程
+
+1. 抛出异常
+   
+2. 系统查找可以接受该异常的异常处理器
+   
+3. 控制器在离抛出点最近的处理器中恢复
+
+4. 如果没有找到符合要求的异常处理器，则程序退出
+
+与Java不同的是，Scala所有的异常都是Throwable的子类，没有[受检异常][1]。
+
+### 异常语法
+
+抛出异常：
+
+```scala
+if(x >= 0) {
+    sqrt(x)
+} else throw new IllegalArgumentEcxeption("x should not be negative")
+```
+
+捕获异常：
+
+```scala
+try{
+    process(new URL("http://horstann.com/fred-tiny.gif"))
+} catch {
+    case _: MalformedURLException => println("Bad URL: " + url)
+    case ex: IOException => ex.printStackTrace()
+}
+```
+
+需要注意的是throw表达式有特殊的类型Nothing，另外异常捕获时更通用的异常应该排在具体的异常之后。
+
+
+## finally语句
+
+try/finally结构中finally语句不管是否抛出异常都会被执行
+
+```scala
+val in = new URL("http://horstmann.com/fred.gif").openStream()
+try{
+    process(in)
+} finally {
+    in.close()
+}
+```
+
+try/catch和try/finally结合一起使用：
+
+```
+try{...} catch {...} finally {...}
+```
+
+# Scala面向对象
+
+## 类的定义：属性及方法
+
+类是具有共同属性和行为的对象的集合。类定义了对象的属性和方法：
+
+```scala
+class Counter {
+    private var value = 0
+    def increment() {value += 1}
+    def current() = value
+}
+```
+
+Scala中的类不声明为public，一个Scala源文件中可以有多个类。
+
+### 类成员的可见性
+
+Scala中也有类似于Java的权限修饰符(public, private, protected):
+
+- Scala类中所有成员的默认可见性为公有，任何作用域内都可以访问公有成员。
+
+- 除了默认的公有可见性，Scala也提供了private和protected，private成员只对本类型和嵌套类型可见，protected成员对本类型和其集成类型都可见。
+
+- 对于private字段，Scala采用与Java类似的getter和setter方法进行读取和修改，但是还稍微有些不同(???)。
+
+
+### 类的使用
+
+使用类需要做的就是构造对象并按照通常的方式来调动方法：
+
+```scala
+val myCounter = new Counter //或new Counter()
+myCounter.increment()
+println(myCounter.current)
+```
+
+`通过在方法定义时不带()来强制方法调用时不加().`
+
+### 带getter和setter的属性
+
+一对getter/setter通常被称做属性：
+
+- Scala为每个字段都提供getter和setter方法
+
+- 以字段age为例，Scala中getter和setter分别是age和age_=
+
+- 任何时候都可以重新定义getter和setter方法。
+
+- Scala可以实现只读属性，但是不能实现只写属性。
+
+### 自定义属性
+
+- var foo:Scala自动合成一个getter和setter
+
+- val foo1:Scala自动合成一个getter
+
+- 自定义foo和foo_=方法
+
+- 只能自定义foo1方法，不能自定义foo1_=方法
+
+将Scala字段标注为@BeanProperty时，会自动生成符合JavaBean规范的getter和setter方法：
+
+| Scala字段 | 生成的方法 | 何时使用 |
+|:--------:|:---------:|:-------:|
+| val/var name | 公有的name name_=(仅限var) | 实现一个可以被公开访问并且背后是以字段形式保存的属性 |
+| @BeanProperty val/var name | 公有的name getName() name_=(仅限于var) setName(...)(仅限于var) | 与JavaBeans互操作 |
+| private val/var name | 私有name name_=(仅限于var) | 用于将字段访问限制在本类的方法，就和Java一样。尽量使用private--除非你真的需要一个公有的属性 |
+| private[this] val/var name | 无 | 用于将字段访问限制在同一个对象上调用的方法，并不经常用到|
+| private[类名] val/var name | 依赖于具体实现 | 将访问权限赋予外部类，并不经常用到 |
+
+## 类构造方法
+
+Scala类的定义主体就是类的构造器，称为主构造器。在类名之后用圆括号列出主构造器的参数列表，主构造器会执行类定义中的所有语句；Scala自动为主构造器的参数列表创建私有字段，并提供对应的访问方法。
+
+如果类名之后没有参数，则该类具备一个无参主构造器。
+
+```scala
+class Person(val name: String, val age: Int) {
+    //(...)中的内容就是主构造器参数
+    ...
+}
+```
+
+在主构造器参数前加不同的修饰符会生成不同的字段和方法：
+
+| 主构造器参数 | 生成的字段和方法 |
+|:----------:|:-------------:|
+| name: String | 对象私有字段，如果没有方法使用name，则没有该字段 |
+| private val/var name: String | 私有字段，私有的getter/setter方法 |
+| val/var name: String | 私有字段，公有的getter/setter方法 |
+| @BeanProperty val/var name: String | 私有字段，公有的Scala版和JavaBean版的getter/setter方法 |
+
+
+Scala类可以包含零个或多个辅助构造器，辅助构造器使用this进行定义，this的返回类型为Unit，每一个辅助构造器的第一行代码必须以一个对先前已定义的其他辅助构造器或主构造器的调用开始。
+
+```scala
+class Person {  //无参主构造器
+    private var name = ""
+    private var age = 0
+
+    def this(name: String) {    //一个辅助构造器
+        this()  //调用主构造器
+        this.name = name
+    }
+
+    def this(name: String, age: Int) {  //另一个辅助构造器
+        this(name)  //调用前一个辅助构造器
+        this.age = age
+    }
+}
+```
+
+辅助构造器不能使用val和var修饰参数。
+
+## object对象
+
+Scala中object对象的属性和方法默认都是静态的，只有一个实例：
+
+```scala
+object Accounts {
+    private var lastNumber = 0
+    def newUniqueNumber() = {
+        lastNumber += 1
+        lastNumber
+    }
+}
+```
+
+使用object对象时只需要使用object对象名就可以直接调用了，比如要调用newUniqueNumber方法：`Accounts.newUniqueNumber()`。对象的构造器在该对象第一次被使用时调用，是个懒加载过程。   
+
+object对象不提供构造器参数。
+
+
+[1]: https://blog.csdn.net/j754379117/article/details/41966337
