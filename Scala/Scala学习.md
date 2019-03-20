@@ -33,7 +33,8 @@ Scala解释器读取一个表达式进行求值，然后打印出结果，再继
 
 # Scala常用类型
 
-$$x = a_{1}^n + a_{2}^n + a_{3}^n$$
+![](http://latex.codecogs.com/gif.latex?\\frac{1}{1+sin(x)})
+
 
 | type | range |
 |:----:|:-----:|
