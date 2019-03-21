@@ -954,7 +954,7 @@ lst match {
 
 ```mermaid
 graph Collection;
-    <trait>Iterable --> <trait>Seq;
+    <trait>Iterable--><trait>Seq;
 ```
 
 ## 序列
