@@ -948,25 +948,6 @@ lst match {
 }
 ```
 
-# Scala集合类
-
-## 集合
-
-```mermaid
-graph Collection;
-    <trait>Iterable--><trait>Seq;
-```
-
-## 序列
-
-## 集合操作
-
-# Scala高级特性
-
-## 隐式转换
-
-
-
 [1]: https://blog.csdn.net/j754379117/article/details/41966337
 [2]: https://blog.csdn.net/shenlei19911210/article/details/78538255
 [3]: https://www.cnblogs.com/yjf512/p/8026611.html
