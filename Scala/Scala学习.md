@@ -827,6 +827,146 @@ trait LoggedException extends Logged {
 
 特质即实现了Java的接口功能，又实现了抽象类的功能，在Scala中还是比较常见的。
 
+## case class 样例类
+
+> case class 是一种特殊的类，经过优化后可以被用于模式匹配。
+
+case class的声明如下：
+
+```scala
+abstract class Amount
+case class Dollar(value: Double) extends Amount
+case class Currency(value: Double, unit: String) extends Amount
+```
+
+声明case class时可以直接使用类名加参数的形式，此时会自动发生如下事件：
+
+- 构造器中每一个参数都成为val，除非被显式地声明为var
+
+- 在伴生对象中提供apply方法可以不用new关键字就能构造出相应的对象。
+
+- 提供unapply方法让模式匹配可以工作
+
+- 生成toString, equals, hashCode和copy方法。
+
+### copy方法和带名参数
+
+样例类的copy方法创建一个与现有对象值相同的新对象，可以用带名参数修改某些属性。
+
+```scala
+val amt = Currency(29.95, "EUR")
+val price = amt.copy()
+val price = amt.copy(value = 19.95)     //Currency(19.95, "EUR")
+```
+
+### 样例类的密封
+
+当case class的超类使用关键字sealed修饰，则编译器会校验对该超类对象的模式匹配规则中，是否列出了可能的子case类，且该超类的子类只能出现在超类的文件中，形成封闭，而不能出现在其他文件中。
+
+```scala
+sealed abstract class Amount
+case class Dollar(value: Double) extends Amount
+case class Currency(value: Double, unit: String) extends Amount
+```
+
+## 模式匹配
+
+语法：变量 match {case 值 => 代码}
+
+如果case值为下划线，则代表不满足以上所有情况。match case中只要一个case分支满足条件并处理了，就不会继续判断下一个case分支了。
+
+```scala
+var sign = ...
+val ch: Char = ...
+ch match {
+    case '+' => sign = 1
+    case '-' => sign = -1
+    case _ => sign = 0
+}
+```
+
+Scala模式匹配不会意外调入下一个分支。
+
+在case后的条件判断中可以在值后面加一个if条件，进行双重过滤，比如：
+
+```scala
+ch match {
+    case '+' => sign = 1
+    case '-' => sign = -1
+    case _ if Character.isDigit(ch) => digit = Character.digit(ch, 10)
+    case _ => sign = 0
+}
+```
+
+**if后的条件可以是任意类型的Boolean类型**。
+
+如果case关键字后面跟着一个变量名，那么匹配到的这个变量值会被赋值到后面的表达式中：
+
+```scala
+str(i) match {
+    case '+' => sign = 1
+    case '-' => sign = -1
+    case ch => digit = Character.digit(ch, 10)
+}
+```
+
+case还可以对类型进行模式匹配，case 变量 : 类型 => 代码
+
+```scala
+obj match {
+    case x: Int => x
+    case s: String => Integer.parseInt(s)
+    case _: BigInt => Int.MaxValue
+    case _ => 0
+}
+```
+
+case还可以匹配数组、列表和元组。
+
+```scala
+//匹配数组
+arr match {
+    case Array(0) => "0"        //匹配到数组只有一个元素0
+    case Array(x, y) => x + " " + y     //匹配到数组有两个元素
+    case Array(0, _*) => "0..."     //匹配到数组第一个元素是0，后面有不确定个元素、
+    case _ => "something else"
+}
+
+//匹配元组
+pair match{
+    case (0, _) => "0 ..."      //匹配到第一个元素是0的元组
+    case (y, 0) => y + " 0"     //匹配到末尾元素是0的元组
+    case _ => "neither is 0"    
+}
+
+//列表
+lst match {
+    case 0 :: Nil => "0"                //匹配到列表只有一个元素0
+    case x :: y :: Nil => x + " " + y   //匹配到列表有两个元素
+    case 0 :: tail => "0 ..."           //匹配到列表0开头的列表
+    case _ => "somthing else"
+}
+```
+
+# Scala集合类
+
+## 集合
+
+```mermaid
+graph Collection;
+    <trait>Iterable --> <trait>Seq;
+```
+
+## 序列
+
+## 集合操作
+
+# Scala高级特性
+
+## 隐式转换
+
+
+
 [1]: https://blog.csdn.net/j754379117/article/details/41966337
 [2]: https://blog.csdn.net/shenlei19911210/article/details/78538255
 [3]: https://www.cnblogs.com/yjf512/p/8026611.html
