@@ -287,6 +287,64 @@ class RichFile(val from: File) {
 implicit def file2RichFile(from: File) = new RichFile(from)
 ```
 
+以后直接在File类上面调用read方法的时候，会自动把这个类转换成RichFile类，并且调用RichFile的read方法。
+
+### 引入隐式转换
+
+Scala会考虑如下的隐式转换函数：
+
+- 位于源或目标类型的伴生对象中的隐式函数（太难以理解）
+
+- 位于当前作用域可以以单个标识符指代的隐式函数（太难以理解）
+
+通俗来说就是隐式转换可以在文件头（即类的头）进行转换，也可以在方法中引入隐式转换，这就可以限制隐式转换的作用于在哪个位置，这根Scala引入其他类时添加的作用域是一样的，可以在文件的作用域下，可以在类的作用域下，也可以在某个方法的作用域下。比如：
+
+```scala
+//引入局部化隐式转换
+object Main extends App {
+    import com.horstmann.impatient.FractionConversions._
+    val result = 3 * Franction(4, 5)    //使用引入的转换
+    println(result)
+}
+
+//选择特定转换
+object FractionConversions {
+    ...
+    implicit def fraction2Double(f: Fraction) = f.num * 1.0 / f.den
+}
+
+//排除特定转换
+import com.horstmann.impatient.FractionConversions.{
+    fraction2Double => _, _
+}   //引入除fratcion2Double外的所有成员
+```
+
+### 隐式转换规则
+
+- 当表达式的类型与预期类型不同时：
+
+    ```scala
+    sqrt(Fraction(1, 4))    //将调用fraction2Double，因为sqrt预期的是一个Double
+    ```
+- 当对象访问一个不存在的成员时：
+
+    ```scala
+    new File("Readme").read     //将调用file2RichFile，因为File没有read方法
+    ```
+
+- 当对象调用某个方法，而该方法的参数声明与传入参数不匹配时：
+
+    ```scala
+    * Fraction(4, 5)    //将调用int2Fraction，因为Int的*方法不接受Fraction作为参数
+    ```
+
+一下三种情况下编译器不会尝试使用隐式转换：
+
+- 如果代码在不适用隐式转换的前提下能够通过编译
+
+- 编译器不会尝试同时执行多个转换
+
+- 存在二义性的转换是个错误。
 
 
 [4]: https://github.com/jiaoqiyuan/pics/raw/master/scala/scala_collections.png
