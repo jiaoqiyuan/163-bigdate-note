@@ -1,7 +1,10 @@
 package com.imooc.bigdata;
 
 import org.apache.storm.Config;
-import org.apache.storm.LocalCluster;
+import org.apache.storm.StormSubmitter;
+import org.apache.storm.generated.AlreadyAliveException;
+import org.apache.storm.generated.AuthorizationException;
+import org.apache.storm.generated.InvalidTopologyException;
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
@@ -20,7 +23,7 @@ import java.util.Map;
  * 使用 strom 实现累积求和操作
  */
 
-public class LocalSumStormTopology {
+public class ClusterSumStormAckerTopology {
 
     /**
      * Spout 需要继承 BaseRichSpout，数据源需要产生数据并发射
@@ -102,13 +105,23 @@ public class LocalSumStormTopology {
     public static void main(String[] args) {
         //根据Spout和Bolt构建出TopologyBuilder，Storm中任何作业都是通过Topology提交的，Topology中需要指定Spout和Bolt的顺序
         TopologyBuilder builder = new TopologyBuilder();
-        builder.setSpout("DataSourceSpout", new DataSourceSpout());
-        builder.setBolt("SumBolt", new SumBolt()).shuffleGrouping("DataSourceSpout");
+        builder.setSpout("DataSourceSpout", new DataSourceSpout(), 2).setNumTasks(4);
+        builder.setBolt("SumBolt", new SumBolt(), 2).setNumTasks(4).shuffleGrouping("DataSourceSpout");
 
 
-        //创建一个本地模式运行的Storm集群
-        LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology("LocalSumStormTopology", new Config(), builder.createTopology());
+        //创建一个集群模式运行的Storm集群
+        String name = ClusterSumStormAckerTopology.class.getSimpleName();
+        try {
+            Config config = new Config();
+            config.setNumWorkers(2);
+            StormSubmitter.submitTopology(name, config, builder.createTopology());
+        } catch (AlreadyAliveException e) {
+            e.printStackTrace();
+        } catch (InvalidTopologyException e) {
+            e.printStackTrace();
+        } catch (AuthorizationException e) {
+            e.printStackTrace();
+        }
 
 
     }
