@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>热力图</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html,
+        body,
+        #container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div class="input-card" style="width: auto;">
+    <div class="input-item">
+        <button class="btn" onclick="heatmap.show()">显示热力图</button>
+    </div>
+    <div class="input-item">
+        <button class="btn" onclick="heatmap.hide()">关闭热力图</button>
+    </div>
+</div>
+<script src="https://webapi.amap.com/maps?v=1.4.14&key=160fffaabca22a79088be4017ed4beb0"></script>
+<script src="https://a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
+<script>
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        center: [116.418261, 39.921984],
+        zoom: 11
+    });
+
+    // map.plugin(["AMap.MouseTool"],function(){ 
+    //     var mousetool = new AMap.MouseTool(map); 
+    //     mousetool.rule(); //使用鼠标工具，在地图上画标记点
+    // });
+
+    // 同时引入工具条插件，比例尺插件和鹰眼插件
+    AMap.plugin([
+        'AMap.ToolBar',
+        'AMap.Scale',
+        'AMap.OverView',
+        'AMap.MapType',
+        'AMap.Geolocation',
+    ], function(){
+        // 在图面添加工具条控件，工具条控件集成了缩放、平移、定位等功能按钮在内的组合控件
+        map.addControl(new AMap.ToolBar());
+
+        // 在图面添加比例尺控件，展示地图在当前层级和纬度下的比例尺
+        map.addControl(new AMap.Scale());
+
+        // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
+        map.addControl(new AMap.OverView({isOpen:true}));
+    
+        // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
+        map.addControl(new AMap.MapType());
+    
+        // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
+        map.addControl(new AMap.Geolocation());
+    });
+
+
+    
+
+    // if (!isSupportCanvas()) {
+    //     alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
+    // }
+
+    //详细的参数,可以查看heatmap.js的文档 http://www.patrick-wied.at/static/heatmapjs/docs.html
+    //参数说明如下:
+    /* visible 热力图是否显示,默认为true
+     * opacity 热力图的透明度,分别对应heatmap.js的minOpacity和maxOpacity
+     * radius 势力图的每个点的半径大小
+     * gradient  {JSON} 热力图的渐变区间 . gradient如下所示
+     *	{
+     .2:'rgb(0, 255, 255)',
+     .5:'rgb(0, 110, 255)',
+     .8:'rgb(100, 0, 255)'
+     }
+     其中 key 表示插值的位置, 0-1
+     value 为颜色值
+     */
+    var heatmap;
+    var points =[
+        {"lng":116.191031,"lat":39.988585,"count":1000},
+        {"lng":116.389275,"lat":39.925818,"count":11},
+        {"lng":116.287444,"lat":39.810742,"count":12},
+        {"lng":116.481707,"lat":39.940089,"count":13},
+        {"lng":116.410588,"lat":39.880172,"count":14},
+        {"lng":116.394816,"lat":39.91181,"count":15},
+        {"lng":116.416002,"lat":39.952917,"count":1600}
+    ];
+    map.plugin(["AMap.Heatmap"],function() {      //加载热力图插件
+        heatmap = new AMap.Heatmap(map, {
+            radius: 50,
+            opacity: [0, 1]
+        });    //在地图对象叠加热力图
+        heatmap.setDataSet({
+            data:points,
+            max:100
+        }); //设置热力图数据集
+        //具体参数见接口文档
+    }); 
+
+    //判断浏览区是否支持canvas
+    function isSupportCanvas() {
+        var elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+    }
+</script>
+</body>
+</html>
