@@ -53,6 +53,13 @@
             <version>${spark.version}</version>
         </dependency>
 
+        <!--hive-jdbc-->
+        <dependency>
+            <groupId>org.spark-project.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>1.2.1.spark2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
