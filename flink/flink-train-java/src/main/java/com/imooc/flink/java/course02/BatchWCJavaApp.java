@@ -15,7 +15,7 @@ public class BatchWCJavaApp {
         text.flatMap(new FlatMapFunction<String, Tuple2<String, Integer>>() {
             @Override
             public void flatMap(String value, Collector<Tuple2<String, Integer>> collector) throws Exception {
-                String[] tokens = value.toLowerCase().split("\t");
+                String[] tokens = value.toLowerCase().split(",");
                 for (String token : tokens) {
                     if (token.length() > 0) {
                         collector.collect(new Tuple2<String, Integer>(token, 1));
