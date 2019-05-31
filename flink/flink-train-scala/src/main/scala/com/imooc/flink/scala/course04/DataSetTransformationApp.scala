@@ -10,12 +10,24 @@ object DataSetTransformationApp {
         val env = ExecutionEnvironment.getExecutionEnvironment
         //mapFunction(env)
         //filterFunction(env)
-        //mapPartitionFunction(env)
+        mapPartitionFunction(env)
         //firstFunction(env)
         //flatMapFunction(env)
         //distinctFunction(env)
         //joinFunction(env)
-        outerJoinFunction(env)
+        //outerJoinFunction(env)
+        //corssFunction(env);
+    }
+
+    def corssFunction(env: ExecutionEnvironment): Unit = {
+        val info1 = List("曼联","曼城");
+        val info2 = List(3, 1, 0);
+
+        import org.apache.flink.api.scala._
+        val data1 = env.fromCollection(info1);
+        val data2 = env.fromCollection(info2);
+
+        data1.cross(data2).print()
     }
 
     def outerJoinFunction(env: ExecutionEnvironment): Unit ={

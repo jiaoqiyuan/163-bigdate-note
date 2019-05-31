@@ -18,12 +18,29 @@ public class DataSetTransformationApp {
         ExecutionEnvironment environment = ExecutionEnvironment.getExecutionEnvironment();
         //mapFunction(environment);
         //fileterFunction(environment);
-        //mapPartitionFunction(environment);
+        mapPartitionFunction(environment);
         //firstFunction(environment);
         //flatMapFunction(environment);
         //distinctFunction(environment);
         //joinFunction(environment);
-        outerJoinFunction(environment);
+        //outerJoinFunction(environment);
+        //crossFunction(environment);
+    }
+
+    private static void crossFunction(ExecutionEnvironment environment) throws Exception {
+        List<String> info1 = new ArrayList<>();
+        info1.add("曼联");
+        info1.add("曼城");
+
+        List<Integer> info2 = new ArrayList<>();
+        info2.add(3);
+        info2.add(1);
+        info2.add(0);
+
+        DataSource<String> data1 = environment.fromCollection(info1);
+        DataSource<Integer> data2 = environment.fromCollection(info2);
+
+        data1.cross(data2).print();
     }
 
     private static void outerJoinFunction(ExecutionEnvironment env) throws Exception {
@@ -196,6 +213,9 @@ public class DataSetTransformationApp {
                 String connection = DBUtils.getConnnection();
                 System.out.println("connection = " + connection);
                 DBUtils.returnConnection(connection);
+                for (String word : inputs) {
+                    collector.collect(word);
+                }
             }
         }).print();
     }
