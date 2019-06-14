@@ -116,9 +116,9 @@ object MyList {
         foldLeft(list, 0)((_, acc) => acc + 1)
     }
 
-    def reverse[A](list: List[A]): List[A] = {
-
-    }
+//    def reverse[A](list: List[A]): List[A] = {
+//
+//    }
 
     def main(args: Array[String]): Unit = {
 //        hw3_1()
