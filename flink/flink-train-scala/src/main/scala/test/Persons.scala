@@ -146,7 +146,7 @@ abstract class Person_1 {
     }
 }
 
-class Employee extends Person_1 {
+class Employee_1 extends Person_1 {
     override var name: String = "Jerry"
 
     override def id: Int = {
@@ -287,5 +287,52 @@ object TratiTest2 {
     def main(args: Array[String]): Unit = {
         val acc = new SavingAccount_1
         acc.withdraw(100.0)
+    }
+}
+
+
+/********样例类***********/
+
+object CaseClassDemo {
+    def main(args: Array[String]): Unit = {
+
+        case class Message(sender:String, recipient:String, body:String)
+
+        val message1 = Message("Jerry", "Tom", "Hello")
+
+        println(message1.sender)
+
+        //message1.sender = "kate"
+
+        val message2 = Message("Jerry", "Tom", "Hello")
+
+        println(message1 == message2)   //true，说明样例类是基于值进行比较的
+
+        //样例类拷贝，浅拷贝
+        val message3 = message1.copy()
+        println(message3.sender + message3.recipient + message3.body)
+        println(message1 == message3)
+        //不完全拷贝,对部分参数赋值
+        val message4 = message1.copy(sender = "john")
+        println(message4.sender + message4.recipient + message4.body)
+    }
+}
+
+/************************/
+
+object PatternDemo {
+    def main(args: Array[String]): Unit = {
+        val site = "google.com"
+        val GOOGLE = "google.com"
+        site match {
+            case GOOGLE => println("success")
+            case _ => println("fail")
+        }
+
+        val list = List(1,2,3)
+        list match {
+            case List(_, _, 3) => println("success")
+            case _ => println("failed")
+        }
     }
 }
