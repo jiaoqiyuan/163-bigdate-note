@@ -117,3 +117,128 @@ object Test {
     }
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+object Match_Test {
+    def matchTest(x: Int): String = x match {
+        case 1 => "one"
+        case 2 => "two"
+        case _ => "many"
+    }
+
+    def main(args: Array[String]): Unit = {
+        println(matchTest(3))
+
+        val alice = new Person("Alice", 24)
+        val bob = new Person("Bob", 32)
+        val charlie = new Person("Charlie", 32)
+
+        for (person <- List(alice, bob, charlie)) {
+            person match {
+                case Person("Alice", 24) => println("Hi Alice")
+                case Person("Bob", 32) => println("Hi, Bob")
+                case Person(name, age) => println("Age: " + age + " year, name: " + name + " ?")
+            }
+        }
+    }
+
+    case class Person(name: String, age: Int)
+}
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+
+import java.io.{File, PrintWriter}
+
+import scala.io.{Source, StdIn}
+import scala.util.matching.Regex
+
+object Regex_Test {
+    def main(args: Array[String]): Unit = {
+        val pattern = "Scala".r
+        val str = "Scala is scalable and cool"
+
+        println(pattern.findFirstIn(str))
+
+        val pattern1 = new Regex("(S|s)cala")
+        println(pattern1.findAllIn(str).mkString(","))
+
+        val pattern2 = "(S|s)cala".r
+        println(pattern2.replaceFirstIn(str, "Java"))
+
+
+    }
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+import java.io.IOException
+import java.io.{FileNotFoundException, FileReader}
+object Exception_Test {
+    def main(args: Array[String]): Unit = {
+        try {
+            val f =  new FileReader("/home/jony/bigdata/openvp")
+        } catch {
+            case ex: FileNotFoundException => {
+                println("Missing file exception")
+            }
+            case ex: IOException => {
+                println("IO Exception")
+            }
+        } finally {
+            println("exiting finally...")
+        }
+    }
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+object Extractor_Test {
+    def main(args: Array[String]): Unit = {
+        println("Applay method: " + apply("Zara", "gmail.com"))
+        println("Unapply method " + unapply("Zara@gmail.com"))
+        println("Unapply method: " + unapply("Zara Ali"))
+
+        val x = Extractor_Test(5)
+        println(x)
+        x match {
+            case Extractor_Test(num) => println(x + " is " + num + "'s twice bigger")
+            case _ => println("无法计算")
+        }
+    }
+
+    def apply(user: String, domain: String) = {
+        user + "@" + domain
+    }
+
+
+    def unapply(str: String): Option[(String, String)] = {
+        val parts = str.split("@")
+        if (parts.length == 2) {
+            Some(parts(0), parts(1))
+        } else {
+            None
+        }
+    }
+
+    def apply(x: Int) = x * 2
+    def unapply(z: Int): Option[Int] = if (z % 2 == 0) Some(z / 2) else None
+
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+object File_Test {
+    def main(args: Array[String]): Unit = {
+        val writer = new PrintWriter(new File("/home/jony/scala_file.txt"))
+        writer.write("hello scala!")
+        writer.close()
+
+        val line = StdIn.readLine()
+        println("Input " + line)
+
+        Source.fromFile("/home/jony/scala_file.txt").foreach(print)
+    }
+}
